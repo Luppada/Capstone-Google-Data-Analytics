@@ -10,3 +10,11 @@ First Capstone Project for the Google Data Analyti cs Certification
 **End Date**: Work in Progress
 
 
+##### Phase 1: Ask
+
+**Identifying Stakeholders**
+
+Primary Stakeholders:
+Secondary Stakeholders:
+
+**Business Task**
