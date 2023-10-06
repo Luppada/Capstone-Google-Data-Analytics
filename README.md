@@ -23,5 +23,5 @@ Analyze the data collected by Cyclistic to differentiate the bike usage between 
 ##### Phase 2: Prepare
 
 **Dataset**
-The dataset used is named as 2021-tripdata, downloaded from the [url](https://divvy-tripdata.s3.amazonaws.com/index.html). 
+The dataset used is named as 2021-tripdata, downloaded from [this webpage](https://divvy-tripdata.s3.amazonaws.com/index.html). 
 
