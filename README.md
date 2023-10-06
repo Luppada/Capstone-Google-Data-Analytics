@@ -14,7 +14,10 @@ First Capstone Project for the Google Data Analyti cs Certification
 
 **Identifying Stakeholders**
 
-Primary Stakeholders:
-Secondary Stakeholders:
+Stakeholders: Lily Moreno (Director of Marketing and Manager), Cyclistic executive team
 
 **Business Task**
+
+Analyze the data collected by Cyclistic to differentiate the bike usage between casual riders and annual customers.  
+
+##### Phase 1: Prepare
