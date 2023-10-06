@@ -30,3 +30,33 @@ Analyze the data collected by Cyclistic to differentiate the bike usage between 
 The dataset used is named as 'Divvy_Trips_2020_Q1.zip', downloaded from [this webpage](https://divvy-tripdata.s3.amazonaws.com/index.html). 
 
 Upon downloading the zip file it is extracted and renamed as 'Trips_2020_Q1'. This dataset consists of data collected in the first quarter of 2020 (January to March).  While there are many other sources, I wanted to use the latest data that is collected for longer period of time as it can provide more insights that will allow a better understanding of how the riders are using Cyclistic bikes. 
+
+
+##### Phase 3: Process
+
+Data Integrity and Cleaning
+
+After extracting the file, I have tried to open it using excel. FYI, the size of this file is 69 MB and it has over 40,000 rows. This caused a heavy load on the excel software. Therefore, I have decided to use the Pandas package in the Python to check the data integrity and for any additional processing required. Jupyter Notebook is the platform I have used to look for data integrity.
+
+I will add the ipynb file to my for reference. 
+
+Upon initial inspection, I have noticed that there are a two columns that have null values. Upon inspection, it was clear that only one row has missing values at in the end_station_name and end_station_id columns. I have removed this row from the dataset. 
+
+ Then I moved forward to check how many columns have unique values less than 10 (It is an aribitrary value) to check for any attributes that we must analyze. 
+
+ It turns out that there are only two such columns. 
+ 1. rideable_type - The unique values are:  ['docked_bike']
+ 2. member_casual - The unique values are:  ['member' 'casual'] - Refers to the type of bike user. 
+
+Then I converted the date in 'started_at' and 'ended_at' columns into datetime datatype from object datatype.
+
+Then I split these columns based on the month, day and hour for future analysis.
+As the data is now close to being ready for analysis, I split the data based on member_casual type. 
+
+Then I used the describe function to ensure that the everything is set to move forward with analysis.
+
+In the casual rider dataframe, the minimum value for the ride_time column is negative. This represents an irregularity in the data collection process as the ride time can be only zero at a minimum because time as we know is uniderctional.  For now we will focus removing these values depending how many of these values exist in the dataframe as they might skew further analysis.
+I learned that the size of these rows us 117 where the size of the entire dataframe is 48480 rows long. This means that removing these rows will cause a minimal impact to the dataset.
+
+##### Phase 3: Analyze
+
