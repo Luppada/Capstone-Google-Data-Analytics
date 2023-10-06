@@ -10,6 +10,10 @@ First Capstone Project for the Google Data Analyti cs Certification
 **End Date**: Work in Progress
 
 
+#### Background
+
+A data analyst(me) is working in the marketing analyst team of a Chicago-based bike-share company called Cyclistic. This company provides both annual memberships and casual (single-ride or full-day) passes. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. The Data Analyst is tasked to create an analysis and report their insights. These insights will be used to support design a new marketing strategy to convert casua riders into annual members. Visuals will play a key role in having the new strategy approved by Cyclistic Executives.
+
 ##### Phase 1: Ask
 
 **Identifying Stakeholders**
@@ -23,5 +27,6 @@ Analyze the data collected by Cyclistic to differentiate the bike usage between 
 ##### Phase 2: Prepare
 
 **Dataset**
-The dataset used is named as 2021-tripdata, downloaded from [this webpage](https://divvy-tripdata.s3.amazonaws.com/index.html). 
+The dataset used is named as 'Divvy_Trips_2020_Q1.zip', downloaded from [this webpage](https://divvy-tripdata.s3.amazonaws.com/index.html). 
 
+Upon downloading the zip file it is extracted and renamed as 'Trips_2020_Q1'. This dataset consists of data collected in the first quarter of 2020 (January to March).  While there are many other sources, I wanted to use the latest data that is collected for longer period of time as it can provide more insights that will allow a better understanding of how the riders are using Cyclistic bikes. 
