@@ -59,4 +59,15 @@ In the casual rider dataframe, the minimum value for the ride_time column is neg
 I learned that the size of these rows us 117 where the size of the entire dataframe is 48480 rows long. This means that removing these rows will cause a minimal impact to the dataset.
 
 ##### Phase 3: Analyze
-
+Guiding Questions:
+● How should you organize your data to perform analysis on it?
+- 
+● Has your data been properly formatted?
+- The data was separated into two dataframes for analysis based on the member type. Then I have created two heatmaps with these dataframes to discover hidden relationships. 
+● What surprises did you discover in the data?
+- The started_month and ended_month, started_day and ended_day and started_hour and ended_hour do not always have a correlation of 1. 
+  
+● What trends or relationships did you find in the data?
+Bikes are not always returned in the same hour or on the same day sometimes even in the same month.
+● How will these insights help answer your business questions?
+The return rate of bikes allows us to understand that sometimes users want to use the bikes for a month or even a few days. 
