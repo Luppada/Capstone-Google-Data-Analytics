@@ -1,5 +1,5 @@
 # Capstone-Google-Data-Analytics
-First Capstone Project for the Google Data Analyti cs Certification 
+First Capstone Project for the Google Data Analytics Certification 
 
 #### **Author**: Likhith Sri Vatsa Uppada  
 
@@ -65,24 +65,21 @@ Then I created two dataframes from the original dataframe based on the member_ca
 
 I have started the analysis process trying to understand the basic information, that any stakeholder will want to know. For example, the total number of bike rides in the quarter, by the month etc.
 
-Then I have used 
+Then I have used correlation on all three dataframes (df, casual dataframe and member dataframe). I have used heatmaps to represent the variation in the correlation values.
 
-Guiding Questions:
-● How should you organize your data to perform analysis on it?
-- 
-● Has your data been properly formatted?
-- The data was separated into two dataframes for analysis based on the member type. Then I have created two heatmaps with these dataframes to discover hidden relationships. 
-● What surprises did you discover in the data?
-- The started_month and ended_month, started_day and ended_day and started_hour and ended_hour do not always have a correlation of 1. 
-  
-● What trends or relationships did you find in the data?
-Bikes are not always returned in the same hour or on the same day sometimes even in the same month.
+The started_month and ended_month, started_day and ended_day and started_hour and ended_hour do not always have a correlation of 1. This means that the bikes are not always returned in the same hour or on the same day sometimes even in the same month.
 ● How will these insights help answer your business questions?
 The return rate of bikes allows us to understand that sometimes users want to use the bikes for a month or even a few days. 
 
 
 ##### Phase 5: Share
-I
+
+The audience - The executive team wants to know how the differently the casual members and annual members behave. We know that they are detail oriented. Giving them an option to navigate and assess changes through various features like member type and month will be useful.
+
+The story - 
+
+While I have used the visuals in python for analysis, I want to create my final dashboard and visuals using Tableau as it provides more aesthetic control and options for visuals.
+
 Findings, story and audience, accessibility
 
 ##### Phase 6: Act
