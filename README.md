@@ -84,6 +84,9 @@ Findings, story and audience, accessibility
 
 ##### Phase 6: Act
 What additional data?
+
+A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
+
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/af127a28-0fdc-4683-beab-4f10a8f006bc)
 
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members.
