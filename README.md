@@ -84,8 +84,21 @@ The story -
 
 The riders use the bikes with varying ride time that ranges from under a month to over three months. 
 
+Below chart represents how many rides were initiated by the customers in each month of the quarter.
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/95d4b3f6-9a4e-494d-9551-2fc50ee63b97)
+
+Below chart represents how many rides were initiated by the customers in each month of the quarter.
+
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/e908f5ec-a802-4e9f-91f1-09a158124ba3)
 
+Below chart represents how many rides were initiated by the customers each calendar date of the month.
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/dd43f135-8942-4589-b93d-0ccc7fae5fb1)
+
+Below chart represents how many rides were initiated by the customers each hour of a day.
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/0aff7192-2a69-416f-9c20-f0e0e586a5c8)
 
 Findings, story and audience, accessibility
 
