@@ -71,14 +71,22 @@ The started_month and ended_month, started_day and ended_day and started_hour an
 ● How will these insights help answer your business questions?
 The return rate of bikes allows us to understand that sometimes users want to use the bikes for a month or even a few days. 
 
+While I have used the visuals in python for analysis, I want to create my final dashboard and visuals using Tableau as it provides more aesthetic control and options for visuals.
 
 ##### Phase 5: Share
 
 The audience - The executive team wants to know how the differently the casual members and annual members behave. We know that they are detail oriented. Giving them an option to navigate and assess changes through various features like member type and month will be useful.
 
+
 The story - 
 
-While I have used the visuals in python for analysis, I want to create my final dashboard and visuals using Tableau as it provides more aesthetic control and options for visuals.
+ Cyclistic recorded 426770 bike rides started in their first quarter. Out of that 48,363 rides were started by casual riders and the remaining 378,407 rides were started exclusively by the annual members.
+
+The riders use the bikes with varying ride time that ranges from under a month to over three months. 
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/7df506cd-b54c-4487-98eb-64614e1f92c4)
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/4ebd9d8f-cfec-4bbf-bf30-73367ebb68bf)
 
 Findings, story and audience, accessibility
 
@@ -91,3 +99,4 @@ A critical part of data that is missing is the member ID. While we are able to i
 
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members.
 Then I can use the member personal info like age groups, professions etc to detect which popuation  
+ 
