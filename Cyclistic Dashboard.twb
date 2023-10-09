@@ -539,6 +539,7 @@
       <column-instance column='[started_month]' derivation='Count' name='[cnt:started_month:vtnone:qk]' pivot='key' type='quantitative' visual-totals='None' />
       <column-instance column='[started_month]' derivation='CountD' name='[ctd:started_month:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Calculation_2179460753752875010]' derivation='None' name='[none:Calculation_2179460753752875010:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Calculation_2179460753785413636]' derivation='None' name='[none:Calculation_2179460753785413636:qk]' pivot='key' type='quantitative' />
       <column-instance column='[ended_month]' derivation='None' name='[none:ended_month:ok]' pivot='key' type='ordinal' />
       <column-instance column='[member_casual]' derivation='None' name='[none:member_casual:nk]' pivot='key' type='nominal' />
       <column-instance column='[ride_time]' derivation='None' name='[none:ride_time:qk]' pivot='key' type='quantitative' />
@@ -553,6 +554,12 @@
       <column-instance column='[started_hour]' derivation='Sum' name='[sum:started_hour:qk]' pivot='key' type='quantitative' />
       <group caption='Ended Month Set' name='[Ended Month Set]' name-style='unqualified' user:ui-builder='filter-group'>
         <groupfilter from='1' function='range' level='[none:ended_month:ok]' to='5' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+      </group>
+      <group hidden='true' name='[Exclusions (Member Casual,Ride_time_hours)]' name-style='unqualified' user:auto-column='exclude'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[none:member_casual:nk]' />
+          <groupfilter function='level-members' level='[none:Calculation_2179460753785413636:qk]' />
+        </groupfilter>
       </group>
       <group caption='Started Month Set' name='[Started Month Set]' name-style='unqualified' user:ui-builder='filter-group'>
         <groupfilter from='1' function='range' level='[none:started_month:ok]' to='3' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
@@ -743,7 +750,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run fontname='Arial'>Daily Bike Use </run>
+            <run fontname='Arial'>Bike Usage Breakdown by Date of Month</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -781,7 +788,8 @@
             <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_day:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
             <format attr='title' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_day:qk]' scope='rows' value='' />
             <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_day:qk]' scope='rows' value='' />
-            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:started_day:qk]' scope='cols' value='Day of the month' />
+            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:started_day:qk]' scope='cols' value='' />
+            <format attr='display' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_day:qk]' scope='rows' value='false' />
           </style-rule>
           <style-rule element='refline'>
             <format attr='fill-above' id='refline2' value='#00000000' />
@@ -848,7 +856,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run fontname='Arial'>Hourly Bike Use </run>
+            <run fontname='Arial'>Bike Usage Breakdown by Hours of Day</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -887,7 +895,8 @@
             <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_hour:qk]' scope='rows' value='' />
             <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:started_hour:qk]' field-type='quantitative' max='24' min='0' range-type='fixed' scope='cols' type='space' />
             <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_hour:qk]' field-type='quantitative' max='55888' min='-229' range-type='fixed' scope='rows' type='space' />
-            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:started_hour:qk]' scope='cols' value='Hour of the day' />
+            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:started_hour:qk]' scope='cols' value='' />
+            <format attr='display' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:started_hour:qk]' scope='rows' value='false' />
           </style-rule>
           <style-rule element='quick-filter'>
             <format attr='title' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753752875010:nk]' value='Month Filter'>
@@ -1465,7 +1474,7 @@
           </datasource-dependencies>
           <filter class='quantitative' column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' included-values='in-range'>
             <min>1.0</min>
-            <max>36.799999999999997</max>
+            <max>48.100000000000001</max>
           </filter>
           <slices>
             <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]</column>
@@ -1476,11 +1485,12 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' field-type='quantitative' fold='true' max='144.43517290628873' min='-3.3640197607187123' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' field-type='quantitative' max='144.43517290628873' min='-3.3640197607187123' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' field-type='quantitative' max='289' min='-8' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' field-type='quantitative' max='61.0' min='0.8' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' field-type='quantitative' max='289' min='-15' range-type='fixed' scope='rows' type='space' />
             <format attr='height' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' value='26' />
+            <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' field-type='quantitative' fold='true' max='114.91832460732985' min='0.0' range-type='fixed' scope='cols' synchronized='true' type='space' />
             <format attr='display' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' scope='cols' value='false' />
+            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' scope='rows' value='' />
           </style-rule>
           <style-rule element='refline'>
             <format attr='fill-above' id='refline1' value='#00000000' />
@@ -1488,11 +1498,11 @@
             <format attr='fill-above' id='refline2' value='#00000000' />
             <format attr='fill-below' id='refline2' value='#00000000' />
             <format attr='fill-above' id='refline0' value='#00000000' />
-            <format attr='fill-below' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#333333' />
           </style-rule>
         </style>
         <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
@@ -1500,11 +1510,11 @@
             <encodings>
               <color column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' />
             </encodings>
-            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' enable-instant-analytics='true' formula='constant' id='refline0' label-type='automatic' scope='per-table' value='10' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' z-order='3' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' enable-instant-analytics='true' formula='average' id='refline0' label='Average = &lt;Value&gt;' label-type='custom' probability='95' scope='per-table' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785925637:qk]' z-order='3' />
             <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' enable-instant-analytics='true' formula='constant' id='refline1' label='One week' label-type='custom' scope='per-table' value='7.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' z-order='1' />
             <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' enable-instant-analytics='true' formula='constant' id='refline2' label='One month' label-type='custom' scope='per-table' value='30.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' z-order='2' />
           </pane>
-          <pane id='1' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]'>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
@@ -1513,7 +1523,7 @@
               <color column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' />
             </encodings>
           </pane>
-          <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' x-index='1'>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' x-index='1'>
             <view>
               <breakdown value='auto' />
             </view>
@@ -1562,23 +1572,50 @@
             <column caption='Ride Time' datatype='real' name='[ride_time]' role='measure' type='quantitative' />
             <column caption='Started Month' datatype='integer' name='[started_month]' role='dimension' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.05lkien0bgtq401brrokx1wuom4p].[Exclusions (Member Casual,Ride_time_hours)]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='level-members' level='[none:member_casual:nk]' />
+                <groupfilter function='level-members' level='[none:Calculation_2179460753785413636:qk]' />
+              </groupfilter>
+              <groupfilter function='reorder-dimensionality'>
+                <groupfilter function='crossjoin'>
+                  <groupfilter function='member' level='[none:Calculation_2179460753785413636:qk]' member='1.0' />
+                  <groupfilter function='union'>
+                    <groupfilter function='member' level='[none:member_casual:nk]' member='&quot;casual&quot;' />
+                    <groupfilter function='member' level='[none:member_casual:nk]' member='&quot;member&quot;' />
+                  </groupfilter>
+                </groupfilter>
+                <order>
+                  <hierarchy name='[none:member_casual:nk]' />
+                  <hierarchy name='[none:Calculation_2179460753785413636:qk]' />
+                </order>
+              </groupfilter>
+            </groupfilter>
+          </filter>
           <filter class='quantitative' column='[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]' included-values='in-range'>
             <min>1.0</min>
-            <max>1029.0</max>
+            <max>410.0</max>
           </filter>
           <slices>
             <column>[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]</column>
             <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753752875010:nk]</column>
             <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</column>
+            <column>[federated.05lkien0bgtq401brrokx1wuom4p].[Exclusions (Member Casual,Ride_time_hours)]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' field-type='quantitative' fold='true' max='42.972003351806897' min='0.98731712956928364' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' field-type='quantitative' max='42.972003351806897' min='0.98731712956928364' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' field-type='quantitative' max='18888' min='-228' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' field-type='quantitative' fold='true' max='26.34222654365751' min='22.397900181552796' range-type='fixed' scope='cols' synchronized='true' type='space' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' field-type='quantitative' max='48.0' min='2.0' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' field-type='quantitative' max='200' min='0' range-type='fixed' scope='rows' type='space' />
             <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' scope='cols' value='' />
+            <format attr='title' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' scope='cols' value='' />
+            <format attr='display' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' scope='cols' value='false' />
+            <format attr='width' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' value='36' />
+            <format attr='height' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' value='31' />
           </style-rule>
           <style-rule element='refline'>
             <format attr='fill-above' id='refline1' value='#00000000' />
@@ -1589,6 +1626,9 @@
             <format attr='fill-below' id='refline0' value='#00000000' />
             <format attr='fill-above' id='refline3' value='#00000000' />
             <format attr='fill-below' id='refline3' value='#00000000' />
+            <format attr='stroke-size' id='refline4' value='3' />
+            <format attr='fill-below' id='refline4' value='#555555' />
+            <format attr='fill-above' id='refline4' value='#00000000' />
           </style-rule>
         </style>
         <panes>
@@ -1602,6 +1642,8 @@
             </encodings>
             <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' enable-instant-analytics='true' formula='constant' id='refline0' label='A day' label-type='custom' scope='per-table' value='24.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' z-order='3' />
             <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' enable-instant-analytics='true' formula='constant' id='refline3' label='Three days' label-type='custom' scope='per-table' value='72.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]' z-order='4' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' enable-instant-analytics='true' formula='average' id='refline4' label='Average = &lt;Value&gt;' label-type='custom' probability='95' scope='per-table' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' z-order='5' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' enable-instant-analytics='true' formula='constant' id='refline5' label-type='automatic' scope='per-table' value='171' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]' z-order='6' />
           </pane>
           <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]'>
             <view>
@@ -1733,9 +1775,312 @@
             </point>
             <body x='130' y='-20' />
           </annotation>
+          <annotation class='point' id='6' mark-position='1' pullback='12' text-width='180'>
+            <formatted-text>
+              <run fontcolor='#787878'>RIde time: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User Type: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>Number of users: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]>]]></run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor>
+                      <x-fields>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]</field>
+                      </x-fields>
+                      <y-fields>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>8</value>
+                    <value>24.0</value>
+                    <value>&quot;member&quot;</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='-184' y='-121' />
+          </annotation>
+          <annotation class='point' id='7' mark-position='1' pullback='12' text-width='180'>
+            <formatted-text>
+              <run fontcolor='#787878'>Ride time in hours: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User type: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User count: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]>]]></run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor>
+                      <x-fields>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]</field>
+                      </x-fields>
+                      <y-fields>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785413636:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>9</value>
+                    <value>24.0</value>
+                    <value>&quot;casual&quot;</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='125' y='-151' />
+          </annotation>
         </annotations>
       </table>
       <simple-id uuid='{7653A664-DB89-488E-8AE3-88BD1785A1CD}' />
+    </worksheet>
+    <worksheet name='Ride Time Disribution in Minutes'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontname='Arial'>Ride Time Distribution in Minutes</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='ridetime_clean.csv (Multiple Connections)' name='federated.05lkien0bgtq401brrokx1wuom4p' />
+          </datasources>
+          <datasource-dependencies datasource='federated.05lkien0bgtq401brrokx1wuom4p'>
+            <column caption='Month' datatype='string' name='[Calculation_2179460753752875010]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF [started_month] = 1 THEN &quot;January&quot;&#13;&#10;ELSEIF [started_month] = 2 THEN &quot;February&quot;&#13;&#10;ELSE &quot;March&quot;&#13;&#10;END' />
+            </column>
+            <column caption='Ride_time_minutes' datatype='real' name='[Calculation_2179460753784754179]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='ROUND(([ride_time])/60,0)' />
+            </column>
+            <column-instance column='[Calculation_2179460753784754179]' derivation='Count' name='[cnt:Calculation_2179460753784754179:qk]' pivot='key' type='quantitative' />
+            <column caption='Member Casual' datatype='string' name='[member_casual]' role='dimension' type='nominal'>
+              <aliases>
+                <alias key='&quot;casual&quot;' value='Casual Member' />
+                <alias key='&quot;member&quot;' value='Annual Member' />
+              </aliases>
+            </column>
+            <column-instance column='[Calculation_2179460753752875010]' derivation='None' name='[none:Calculation_2179460753752875010:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_2179460753784754179]' derivation='None' name='[none:Calculation_2179460753784754179:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[member_casual]' derivation='None' name='[none:member_casual:nk]' pivot='key' type='nominal' />
+            <column caption='Ride Time' datatype='real' name='[ride_time]' role='measure' type='quantitative' />
+            <column caption='Started Month' datatype='integer' name='[started_month]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' included-values='in-range'>
+            <min>0.0</min>
+            <max>72.0</max>
+          </filter>
+          <slices>
+            <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753752875010:nk]</column>
+            <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</column>
+            <column>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' field-type='quantitative' fold='true' max='60.0' min='0.0' range-type='fixed' scope='cols' synchronized='true' type='space' />
+            <format attr='title' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' scope='cols' value='' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' field-type='quantitative' max='60.0' min='0.0' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]' field-type='quantitative' max='34668' min='-500' range-type='fixed' scope='rows' type='space' />
+            <format attr='title' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' scope='cols' value='' />
+            <format attr='display' class='1' field='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='fill-above' id='refline1' value='#00000000' />
+            <format attr='fill-below' id='refline1' value='#00000000' />
+            <format attr='fill-above' id='refline2' value='#00000000' />
+            <format attr='fill-below' id='refline2' value='#00000000' />
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#00000000' />
+            <format attr='fill-above' id='refline3' value='#00000000' />
+            <format attr='fill-below' id='refline3' value='#00000000' />
+            <format attr='stroke-size' id='refline4' value='3' />
+            <format attr='fill-below' id='refline4' value='#555555' />
+            <format attr='fill-above' id='refline5' value='#00000000' />
+            <format attr='fill-below' id='refline5' value='#333333' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' />
+            </encodings>
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]' enable-instant-analytics='true' formula='average' id='refline5' label='Average = &lt;Value&gt;' label-type='custom' probability='95' scope='per-table' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]' z-order='6' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' enable-instant-analytics='true' formula='constant' id='refline6' label-type='automatic' scope='per-table' value='15.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' z-order='7' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' enable-instant-analytics='true' formula='constant' id='refline7' label-type='automatic' scope='per-table' value='30.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' z-order='8' />
+            <reference-line axis-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' enable-instant-analytics='true' formula='constant' id='refline8' label-type='automatic' scope='per-table' value='45.0' value-column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' z-order='9' />
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' />
+            </encodings>
+          </pane>
+          <pane id='6' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' x-index='1'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <color column='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</rows>
+        <cols>([federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk] + [federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk])</cols>
+        <annotations>
+          <annotation class='point' id='7' mark-position='1' pullback='12' text-width='180'>
+            <formatted-text>
+              <run fontcolor='#787878'>Ride time: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User type: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User count: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]>]]></run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor x-index='1'>
+                      <x-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      </x-fields>
+                      <y-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>747</value>
+                    <value>30.0</value>
+                    <value>&quot;casual&quot;</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='-147' y='-273' />
+          </annotation>
+          <annotation class='point' id='8' mark-position='1' pullback='12' text-width='180'>
+            <formatted-text>
+              <run fontcolor='#787878'>Ride time: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User type: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]>]]></run>
+              <run>Æ&#10;</run>
+              <run fontcolor='#787878'>User count: </run>
+              <run bold='true'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]>]]></run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor x-index='1'>
+                      <x-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      </x-fields>
+                      <y-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>1904</value>
+                    <value>30.0</value>
+                    <value>&quot;member&quot;</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='40' y='-151' />
+          </annotation>
+          <annotation class='point' id='9' mark-position='1' pullback='12' text-width='180'>
+            <formatted-text>
+              <run fontalignment='1' fontcolor='#787878'>Ride time: </run>
+              <run bold='true' fontalignment='1'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]>]]></run>
+              <run fontalignment='1'>Æ&#10;</run>
+              <run fontalignment='1' fontcolor='#787878'>User type: </run>
+              <run bold='true' fontalignment='1'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]>]]></run>
+              <run fontalignment='1'>Æ&#10;</run>
+              <run fontalignment='1' fontcolor='#787878'>User count: </run>
+              <run bold='true' fontalignment='1'><![CDATA[<[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]>]]></run>
+            </formatted-text>
+            <point>
+              <visual-coordinate class='mark'>
+                <tuple-reference>
+                  <tuple-descriptor>
+                    <pane-descriptor x-index='1'>
+                      <x-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      </x-fields>
+                      <y-fields x-index='1'>
+                        <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      </y-fields>
+                    </pane-descriptor>
+                    <columns>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]</field>
+                      <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+                    </columns>
+                  </tuple-descriptor>
+                  <tuple>
+                    <value>278</value>
+                    <value>45.0</value>
+                    <value>&quot;member&quot;</value>
+                  </tuple>
+                </tuple-reference>
+              </visual-coordinate>
+            </point>
+            <body x='115' y='-175' />
+          </annotation>
+        </annotations>
+      </table>
+      <simple-id uuid='{28A54120-CB31-4540-967A-5FD911507E63}' />
     </worksheet>
     <worksheet name='Ride Time Metrics'>
       <layout-options>
@@ -2185,8 +2530,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='23' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98858' id='22' param='vert' type-v2='layout-flow' w='99000' x='500' y='571'>
+            <zone h='100000' id='27' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98858' id='26' param='vert' type-v2='layout-flow' w='99000' x='500' y='571'>
                 <zone forceUpdate='true' h='5715' id='15' type-v2='text' w='99000' x='500' y='571'>
                   <formatted-text>
                     <run fontcolor='#000000' fontname='Times New Roman' fontsize='24'>Cyclistic Station Metrics</run>
@@ -2259,7 +2604,7 @@
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Bike Usage Differences'>
       <style />
-      <size maxheight='2851' maxwidth='1627' minheight='2851' minwidth='1627' sizing-mode='fixed' />
+      <size maxheight='3251' maxwidth='1727' minheight='3251' minwidth='1727' sizing-mode='fixed' />
       <datasources>
         <datasource caption='ridetime_clean.csv (Multiple Connections)' name='federated.05lkien0bgtq401brrokx1wuom4p' />
       </datasources>
@@ -2286,11 +2631,11 @@
       </datasource-dependencies>
       <zones>
         <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone h='95475' id='30' param='horz' type-v2='layout-flow' w='99016' x='492' y='4244'>
-            <zone h='95475' id='27' param='horz' type-v2='layout-flow' w='99016' x='492' y='4244'>
-              <zone h='95475' id='7' param='horz' type-v2='layout-flow' w='99016' x='492' y='4244'>
-                <zone h='95475' id='5' type-v2='layout-basic' w='99016' x='492' y='4244'>
-                  <zone h='19909' id='3' name='Total Bike Rides' w='51141' x='492' y='4244'>
+          <zone h='95543' id='30' param='horz' type-v2='layout-flow' w='99074' x='463' y='4211'>
+            <zone h='95543' id='27' param='horz' type-v2='layout-flow' w='99074' x='463' y='4211'>
+              <zone h='95543' id='7' param='horz' type-v2='layout-flow' w='99074' x='463' y='4211'>
+                <zone h='95543' id='5' type-v2='layout-basic' w='99074' x='463' y='4211'>
+                  <zone h='12645' id='3' name='Total Bike Rides' w='51170' x='463' y='4211'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2298,7 +2643,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='15352' id='10' name='Monthly Bike Use' w='51121' x='492' y='24153'>
+                  <zone h='15565' id='10' name='Monthly Bike Use' w='51150' x='463' y='16856'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2306,7 +2651,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='17308' id='12' name='Daily Bike Use' w='99016' x='492' y='39505'>
+                  <zone h='15903' id='12' name='Daily Bike Use' w='99074' x='463' y='32421'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2314,7 +2659,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='15352' id='17' name='Weekday Breakdown' w='47895' x='51613' y='24153'>
+                  <zone h='15565' id='17' name='Weekday Breakdown' w='47924' x='51613' y='16856'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2322,7 +2667,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='19909' id='20' name='Ride Time Metrics' w='47875' x='51633' y='4244'>
+                  <zone h='12645' id='20' name='Ride Time Metrics' w='47904' x='51633' y='4211'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2330,7 +2675,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='16168' id='21' name='Hourly Bike Use_' w='99016' x='492' y='56813'>
+                  <zone h='16487' id='21' name='Hourly Bike Use_' w='99074' x='463' y='48324'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2338,7 +2683,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='12526' id='24' name='Ride Time Disribution in Days' w='99016' x='492' y='72981'>
+                  <zone h='11319' id='24' name='Ride Time Disribution in Days' w='99074' x='463' y='64811'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2346,7 +2691,15 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='14212' id='25' name='Ride Time Disribution in Hours' w='99016' x='492' y='85507'>
+                  <zone h='11566' id='25' name='Ride Time Disribution in Hours' w='99074' x='463' y='76130'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='12058' id='41' name='Ride Time Disribution in Minutes' w='99074' x='463' y='87696'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -2358,7 +2711,7 @@
               </zone>
             </zone>
           </zone>
-          <zone forceUpdate='true' h='3963' id='32' type-v2='text' w='99016' x='492' y='281'>
+          <zone forceUpdate='true' h='3965' id='32' type-v2='text' w='99074' x='463' y='246'>
             <formatted-text>
               <run fontcolor='#000000' fontname='Times New Roman' fontsize='24'>Cyclistic Customer Behavior Analysis</run>
             </formatted-text>
@@ -2379,16 +2732,16 @@
         <zone h='2701' id='23' name='Weekday Breakdown' pane-specification-id='0' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' type-v2='color' w='11285' x='29209' y='3648' />
         <zone h='4209' id='11' name='Monthly Bike Use' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' type-v2='filter' w='11104' x='29149' y='6875' />
         <zone h='7401' id='22' mode='radiolist' name='Hourly Bike Use_' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753752875010:nk]' type-v2='filter' w='11165' x='29330' y='11329' />
-        <zone h='2561' id='28' name='Ride Time Disribution in Hours' param='[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='9047' x='80506' y='89056' />
-        <zone h='2561' id='31' name='Ride Time Disribution in Days' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' type-v2='filter' values='database' w='10139' x='78214' y='76114' />
+        <zone h='2553' id='28' name='Ride Time Disribution in Hours' param='[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='9035' x='83098' y='79422' />
+        <zone h='2584' id='31' name='Ride Time Disribution in Days' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' type-v2='filter' values='database' w='10141' x='76521' y='66933' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='2700' minheight='2700' sizing-mode='vscroll' />
+          <size maxheight='3000' minheight='3000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='40' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='99438' id='39' param='vert' type-v2='layout-flow' w='99016' x='492' y='281'>
-                <zone forceUpdate='true' h='3963' id='32' type-v2='text' w='99016' x='492' y='281'>
+            <zone h='100000' id='45' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='99508' id='44' param='vert' type-v2='layout-flow' w='99074' x='463' y='246'>
+                <zone forceUpdate='true' h='3965' id='32' type-v2='text' w='99074' x='463' y='246'>
                   <formatted-text>
                     <run fontcolor='#000000' fontname='Times New Roman' fontsize='24'>Cyclistic Customer Behavior Analysis</run>
                   </formatted-text>
@@ -2400,7 +2753,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='19909' id='3' is-fixed='true' name='Total Bike Rides' w='51141' x='492' y='4244'>
+                <zone fixed-size='280' h='12645' id='3' is-fixed='true' name='Total Bike Rides' w='51170' x='463' y='4211'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2409,7 +2762,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='19909' id='20' is-fixed='true' name='Ride Time Metrics' w='47875' x='51633' y='4244'>
+                <zone fixed-size='280' h='12645' id='20' is-fixed='true' name='Ride Time Metrics' w='47904' x='51633' y='4211'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2427,7 +2780,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='15352' id='10' is-fixed='true' name='Monthly Bike Use' w='51121' x='492' y='24153'>
+                <zone fixed-size='280' h='15565' id='10' is-fixed='true' name='Monthly Bike Use' w='51150' x='463' y='16856'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2436,7 +2789,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='15352' id='17' is-fixed='true' name='Weekday Breakdown' w='47895' x='51613' y='24153'>
+                <zone fixed-size='280' h='15565' id='17' is-fixed='true' name='Weekday Breakdown' w='47924' x='51613' y='16856'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2454,7 +2807,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='17308' id='12' is-fixed='true' name='Daily Bike Use' w='99016' x='492' y='39505'>
+                <zone fixed-size='280' h='15903' id='12' is-fixed='true' name='Daily Bike Use' w='99074' x='463' y='32421'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2472,7 +2825,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='16168' id='21' is-fixed='true' name='Hourly Bike Use_' w='99016' x='492' y='56813'>
+                <zone fixed-size='280' h='16487' id='21' is-fixed='true' name='Hourly Bike Use_' w='99074' x='463' y='48324'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2481,7 +2834,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='2561' id='31' name='Ride Time Disribution in Days' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' type-v2='filter' values='database' w='10139' x='78214' y='76114'>
+                <zone h='2584' id='31' name='Ride Time Disribution in Days' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' type-v2='filter' values='database' w='10141' x='76521' y='66933'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2490,7 +2843,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='12526' id='24' is-fixed='true' name='Ride Time Disribution in Days' w='99016' x='492' y='72981'>
+                <zone fixed-size='280' h='11319' id='24' is-fixed='true' name='Ride Time Disribution in Days' w='99074' x='463' y='64811'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2499,7 +2852,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='2561' id='28' name='Ride Time Disribution in Hours' param='[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='9047' x='80506' y='89056'>
+                <zone h='2553' id='28' name='Ride Time Disribution in Hours' param='[federated.05lkien0bgtq401brrokx1wuom4p].[attr:Calculation_2179460753785413636:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='9035' x='83098' y='79422'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2508,7 +2861,16 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='14212' id='25' is-fixed='true' name='Ride Time Disribution in Hours' w='99016' x='492' y='85507'>
+                <zone fixed-size='280' h='11566' id='25' is-fixed='true' name='Ride Time Disribution in Hours' w='99074' x='463' y='76130'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='12058' id='41' is-fixed='true' name='Ride Time Disribution in Minutes' w='99074' x='463' y='87696'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2552,6 +2914,9 @@
         <viewpoint name='Ride Time Disribution in Hours'>
           <zoom type='entire-view' />
         </viewpoint>
+        <viewpoint name='Ride Time Disribution in Minutes'>
+          <zoom type='entire-view' />
+        </viewpoint>
         <viewpoint name='Ride Time Metrics' />
         <viewpoint name='Total Bike Rides' />
         <viewpoint name='Weekday Breakdown'>
@@ -2563,7 +2928,7 @@
           </highlight>
         </viewpoint>
       </viewpoints>
-      <active id='3' />
+      <active id='25' />
       <simple-id uuid='{CAAF09CA-A53D-4028-A76B-5911A4EF221C}' />
     </window>
     <window class='dashboard' name='Bike Start Stations'>
@@ -2830,10 +3195,22 @@
         <edge name='right'>
           <strip size='160'>
             <card param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
-            <card pane-specification-id='1' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' type='color' />
+            <card pane-specification-id='2' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' type='color' />
           </strip>
         </edge>
       </cards>
+      <viewpoint>
+        <selection-collection>
+          <node-selection select-tuples='false'>
+            <oriented-node-reference orientation='horizontal'>
+              <node-reference>
+                <axis>[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753785925637:qk]</axis>
+              </node-reference>
+              <page-reference />
+            </oriented-node-reference>
+          </node-selection>
+        </selection-collection>
+      </viewpoint>
       <simple-id uuid='{EED6E0DC-D283-427B-A3EB-A8563624F2AA}' />
     </window>
     <window class='worksheet' hidden='true' name='Ride Time Disribution in Hours'>
@@ -2864,16 +3241,6 @@
         </edge>
       </cards>
       <viewpoint>
-        <selection-collection>
-          <node-selection select-tuples='false'>
-            <oriented-node-reference orientation='vertical'>
-              <node-reference>
-                <axis>[federated.05lkien0bgtq401brrokx1wuom4p].[cnt:Calculation_2179460753785413636:qk]</axis>
-              </node-reference>
-              <page-reference />
-            </oriented-node-reference>
-          </node-selection>
-        </selection-collection>
         <highlight>
           <color-one-way>
             <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
@@ -2881,6 +3248,42 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{13A8FA62-E680-41CF-A5F5-65EF83479805}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Ride Time Disribution in Minutes'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='100'>
+            <card param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:Calculation_2179460753784754179:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card pane-specification-id='5' param='[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.05lkien0bgtq401brrokx1wuom4p].[none:member_casual:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{C65F3914-C3EB-42D0-A2B3-937ACFBA6FB3}' />
     </window>
     <window class='worksheet' hidden='true' name='Ride Time Metrics'>
       <cards>
@@ -3183,213 +3586,230 @@
     </thumbnail>
     <thumbnail height='192' name='Bike Usage Differences' width='192'>
       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
-      AAAgAElEQVR4nO3dd5wb1aH3/8+oS6vd1fbei9e9N3AwNTRjeiihJiHhpsDl93CT3JSbcCHl
-      yS8JKYQSeoBgwJhmTHHBvdvrttXbe5G2S6syM+f5Y43x4m5sr22d9+vll7XSzJkzR/PVzJmq
-      CCEEkhSmDCNdAUkaSTIAUliTAZDCmgyAFNZkAKSwJgMghTUZACmsyQBIYU0GQAprMgBSWJMB
-      kMLaIQMghMDd2siqVatoavPQ29d3bKUJQUdTDYveXwpAS9UuFq/YdORRdJXXXn4RX+jopyQJ
-      IehoqWfVqtU0d3Qde71Ok9KdW1m+fBkrVnzGylWrqWtq53CnWnW1N/D62x+gn8B0qndtYPnG
-      3Sdcz+7uLvTjPAVMCEFTdSkfLl11zONsXLGYXdWtx1u90+qgAAg9xB9+8RCvL1lL/qhRNJYX
-      c8/3H+RYm6untYK/PP0GAEajEbPJeMjhWqpr8e97bbFYQTlyubrq57c/f4iFSzeRX1hIXckW
-      7vvRw6jHWK/WuhoGtWMc+ASNGjOWRx68C689lUnjRvHyn37Gw7/7J4da1npaqvnTUy8fc7se
-      yGgyYzpMux6d4NEH72Ft2fEvmE1l63nurY+PeXiTyYzRcJQvdqSJL1n84h/Ejff/z7D3Vn24
-      RPRqqggGg0JVVaHruggFg0LVNKHrulDVkFBVVQghxKC7Qlxy5beFEELoui40TRt6rWkiFAoJ
-      TdNE0Ncj7rruduEJhfYNowpdH5qWtm84/fM39nn76UfFNx/8zbD31i5ZIrqD6v7h1VBIhPbV
-      48DpBbzd4t5bbhedvpDQ9aF6ff7ZgfXUdU2EQkPzp6mqUPd9fnC9hob//N+B5p9fKFaVtAoh
-      hGgtXydyRs0WXnVfGaq6v3zR1yRmX3GrCOmaCO1r06HpfDE/uqaJYDA4NI4YqvPnbX5g3dVQ
-      aN/38kVddU0bVv/P9TTtETdefZm44Xu/HNbGmqrtb5fP3x9qj5DQtKG/O0qXi+vu++nQdxgM
-      7q93KBQUqqodMLy2f/yhcYfaM6SqQvvS9zrSjL/+9a9/fUAa+N+f/JA5N36HGWNz97+dVVBA
-      Z9Uuzps6ifSZ11CU4eLB+79H3qTz2PDxQqpbOnn80Z/jzJlMRrTg3++s487bruKlx3/NS5/u
-      5PKvTeKJv/6V3p4eXntvKflJTv7w+JNkFBRiEwNce9XNzL/723TXFPPmB5+xa+0HvPzpbq6c
-      O2NfDTR++X9+wCW3/4ipRZn765VZUIC7rpTLL72Yy275DtsXv8B9v3yeO2+4mL///R/09rhZ
-      8M4KcpPt/Onxp0kvKCQ7NY6n/vEUPd0e/vTHP5I7YRZVmz7gvod/ixho54EHHiBocrL4zZf4
-      5e+f5IZv3IyndjeLPvqMZe++yvsbqsl1qVx7/d10tpTyxvIyrrp41v46LXjhCSzx+Qx0NvDk
-      3//BhTfdy8Uzx1O2dTVL127lzRf+zo6WELPHpvPUSwuwaX38fw/8J3kzvo59sJFf/v5Juht2
-      8cw765kzMZvbrrmIqsEE5s4YxR9+/t/YU3J588lHWLzbwyUzJ/D6C0/R0NHFv597gnY1kniz
-      l69fcR2BgRYe/9en3DTvkmEr13//6xUe/Pkv+N2PH+KGe/+DaJuJ1rpyrpx7FaYEB//3Z/9F
-      sxrHrDGpPPjAw+giyE9/8QduuPk6Au5aPthYw2VTc7jsvKloqdOZNjqT//nP+4nMmcAHb7xE
-      d18vL7zyNnNmjOe/7rsNty2H7AgfT72yiI66EtbsaWHa+MJT9HN+/A7aBBro8+KwOQ4aML1g
-      Eo/97AGKi3ehh3yMnXkx2RH9LPisjHlXXM6DD/4A2wGlKQYTE0cVMBjU0UIDfPjuEixxmXz7
-      9hvIyh9NbHQsV8y7nPyC0TgNOiD44+9+yxU33sqd3/kh0wrTDpi6jrd3ELvddnC98opIi48C
-      DEyePhUzoPr7+OjDJdjicvjWN68ju2A0CbHxXH755Xz6+j/Q4sdw1bz5fOu6Ofzs0T8zbuIk
-      UIzced8P+el3bqLeE+KR3z/O+GiNqtYenvjrn4mMjmP8lBlUFq8hLnc0ZlXjez/5PU889p8H
-      1Sl/1BiKRhWSk5nMqmXL8AZV/vqXfxAdE830WTPZsnoFQR1M1kju/M4PePhb81mzYQuKwcz8
-      664jMzWZtZ+twRGfxqO/+jllpbtA18ieOItp4woYU5hJUBN0Vm/hrTWVzLvqSn7xi4d55L8e
-      JjptFFFmjRu++1PeePq3wxZ+zd9N66CVOFcid14zjadfWogAUrKLsBlVvj7/Np74w8/4aNky
-      EIK5V1xDZmoybXu24A58UU58Wj5//M0v2FFcDEIldfQMZozK4JPFi/Abovn+fXdii3CRm5KI
-      LqCruYZPV2xg9IxLufqCqUddKE+n4QFQYNb5s9i8dduwt7WAF19Q59q7vs9nrz/Jx+9/wKzL
-      rsbraaG6pRMhYMzUCxifl8yXywMw2eJ55p9/4l9//jkP/OLxg7fbFQXQaKqrpbvXiyUihpvn
-      XYa6fwPZzKw509myZfuwbeZgwIc/qB/Uf7BEJvPU3/4vL/3pv3nokb9xYP+6rq6GQGDo28zM
-      zaPf4wEUzGYzCmAyGIeqA5iNEAppNLe2MWnm+Vx17c288cqzRFhN2C32w/ZvXLFxZGTn8eNf
-      /S91q95iS2UzLa2dnHfBxVx/67d46cnfY1KGtuUVRcFoMuIPBAgMDrByxUrGTZ6GaV8lJlxw
-      Dd6yFbz73mLGn3cRyufNBbQ1NtDj9YMAS3Q6MeZ+/LqO0RqBzXzw/o1P33mTpNRklixZQtHU
-      ObzyzJP4tc8bx4TJpGA0GgiEVEKhIFvXfUZkaiGJLhv6lzor58+/i7pVC1j28fsUzLwMDEb+
-      +dyLfPbGE3zz/h/j++LLI3vq5fzP96/nB3ddz8vvH3sn+nT4Uisp/PCnj1L68cv8e/FKAsEQ
-      3R3NfPjpOixmAyZHHN+5YTZ/f6+YydmxxOZOwdG4nt/87Vne/PfLbC6pQ2gqfjWIEAJN0xFC
-      EPA2sW5bBy+8vgjnQB2DwoDVEGDXth0MBHU0XUMII1decREP/ehHfPjhYl544z2MByzYD/78
-      MYo/eI63PlpDIBjC09bA0hXrMZnMxEY52L69mI2bt9Hlaaeheg+bKj28uOAd7P1VDGoGDPog
-      u3bu5OKrb+bjRa/T7w9SsmsPt999B0JoBEMqQohh/3ShIwRcOXcGd91xF28tXMhTz702NE9q
-      EO1LS4UQOsFgEE3T0DWN7WuWQ+o4xmWnMGdyJnfccz9vL3yTFxd8gK6F0DV133SG/q1e8g5d
-      QTOVpbvxefuob2wGo5Xv33sDL3+whTEZsQD727VoxoWo9dsoaeikq6mUKZfehstiRA34Ub9U
-      Nz3kY2Olm2/ffiPXXnstt9zzI85L7eXVxev31UFDCPbNu07T7g2sKWnG21FPe08flXtr0FSN
-      QCiEEKAYbTz03Zv56V8WccnUHIQW4sMVa3j8n68xIT6Ax6uh6UP1LFn9CYaMqSxevJDdG9ae
-      kgX5RA3vAwCWCBe33/4N9u7YwNIVq/HpVq664mJM+3rzKTFWHOmTmFiYhmK0MP+6a6jYtZ3k
-      wqlcNmcyu7Zvx2Qzk5SWRX1DNXabg/xRo6ko3kRjewdXf+MOMpPiKMhNpstvxmX04sdIhCuR
-      a66/kRjDAA2eQe64/RZs5i9+YW2Rcdx6y42Ub1/PspVrCCpOLr9sLiaDwpQpk9mwfiNzLr6U
-      wvx8xo4rYveWDTS2tnP1zXeRmZRAXnYiPUELc+dexKwxKSxdsZa4vMlcf+ls9uwsRjFZiU9M
-      oKGlDavZQny0g25/CLM1ghtvvYP0KKhp6eb2O++gs7aMoNGI2RFNVlrS/jqWbF+PZo1noKeD
-      msoy6j0hfvu7R0l2RTD7osuxhXpo69W4845b2btnJ2azmZi4eFraOrGaLFx948207d1F3rS5
-      FKU4KZo4HafdQm5hEePHTyA53gWqn+17qnCYjYyZOINvXH8FKz79GPeAwn98724668sZVAUq
-      DvKz0/avHLeuWUbnQJD07DyinXZ6Pa30hUz4ej1YjQoWpw2zLZbOlkYiHQ4mfu0y4uglFJHC
-      1y+YQnxyNs31tVhNJjJz84l22klLjQFbKjMnjQKgYudmqhrbmXPFTeTFmylv7MBstDJ2XD7r
-      V6+mwzPAPd/5FpEO66ldqo+DIsSx7RDWgj52l9eyefVyvnn/j4gwneG7t6RTRmhBdu4up2TL
-      ai697X6SnKaRrtIJO+YjwQPuBh7730coOu9yufCHOdXr4fePPUJ04eyzeuGH41gDSNK5SJ4L
-      JIU1GQAprMkASGFNBkAKazIA57C9eysRQlBRUX7IM1JDg310D/gP/gBoqqti8+bNeHq9p7iW
-      I+vs3oclHdGn7y0k8q47eW3hR9z3TTMNbV3ERtno6erGYrViNQTZ2TjI9Ilj8HmasMWkMNBW
-      Q1T6aAqz89lZsoSE6EZspiRKdpYTMhpJTc3A3VxLXFouuRnJR6/EGU6uAc5hhWMK+PSj9RQW
-      pLFhwwa0QS8l1Q0kOTRccQlU1nWQlT+G2h3LWb+jloH+fmpb3BRkfnF0OzHGzKuvvQdqPzEZ
-      o9nyyb/ZVd9D/xl2MdKJkscBzmF19fX09fZhs1mIsBppcQ8QGR1JstOMsEXR2d6Bu7ubzJwC
-      OurLiU7OhtAgeXl5AFRXV5OTncXbi95jao6LHR4L508bT11FCak5hWSkJIzsDJ4EMgDSEfn6
-      uwkpdqwEEJZI7JZza6Ph3JobaRj/yt/jff02vK/fhn/prwDQ9RC1DQ3HNL67sx1HZAze3k40
-      kx1vdxvdvYfe9HF3dZ+0ep9OshN8DtO7atHb9l08rwydWVuxZwcbSmuJcVjYtLOU7KxsqivL
-      SE7PIiLSjK4qWBRBY2sHqrebS6+Yz57ycmz2Jrpay4lLG4MIDJKWnU1FaRmKARKTUikvLyMr
-      K4fkBBfNrZ0kJsbjHfQzbdKkEWyBo5NrgDBTWlVLhD5IeVUVmQUTaGuswRrposvjobaxlr21
-      NbS2tFBTvhu/NnTPCqPFgX+wB7PFSlVFCd1+nf7eDqISkjAZBQPdnSSlZjDY18nWLZtAC1FS
-      WcWEceNHeG6PTq4BzmHG5HH7Lx8zxA51bCdPmUpWehqlZZUkuhxE5OUjFBNC6PR0deLWvcTF
-      xZCRnU9ObjYA+dlZiOAANuckgkGV+rpaol2JxFvsqPHRGAxGOjvdEJVBbl4B7Z09TMrJxXLC
-      d644fWQnWAprcg1wDvukrJSm3h4AkiIjmTd2PLo+dNmm1WpFUQ5/XYcQAl3XMSgKqq5jMhoJ
-      qSoWs/mgYTVNw2g883/tD0UG4By2pqaK7U2NAIxOSmbe2PEsW/oRUa4EsnMyaWtzk5OZSk1D
-      M6kpKUQ5LPgCKrU11RQUZbB1dyOTM6J49ZPNXDt3Eu+u3c0NF89GN1jQAj58/gAhVaens4Wo
-      2CTGjx9Lye7d5Bfk09rSRkZ2Hnbrmb2Indm1k066gGJg5ozp7NyxlZLdu2nuykX4/DQ0tzE5
-      L4ny5m70kJe2TR3YHYkAmAyCkvpWctPiWLb0U1xJaZgUAwEtSEqMk0FdZ0yqi6effZqCgiI6
-      O5tQlWgKR40a4bk9OhmAc5jFZMJqGvqKLfs2UbIS4lm1ei1Wm4IzKorE2Hg8gSbi46LZU1GN
-      LSoGxWonymkjIsKF2WZn7uzpNLa4iY+PwGEQuOJTMSoKQS1EbIQFS5+XPSV7ueSii2luaScr
-      Iwe7M3EkZ/2YyU6wFNaGHQfYueEzXnjxJV568UU+Xb0Z3etmXXH5/s9Xrlp51AKFrrJ2w8aT
-      XlFJOhWGBaBy1xYuvv4e7r7nHspWf4gnZMBsMuEf6GHjpi2sXr8BIQT1VeUU7y5HFwJ3WyMb
-      N21lMDh0vzeha2zdupktmzfT5wtQXV2NENDZ2kj/YGhEZlKSDuegI8HvLHiJp556ClNyPtFa
-      F1t27+WfTz9NhNNGU0snDSUbeH9lMb2Nu1i4ZB3PPPs8JgZZs2HH/jJa6mqx2i089czzlG5c
-      TmVbH++/+z4ms+xySGeWgwJw/a13c/H0UQizEwNDt/sLGW2MHzOOsaNyqK+twusboK1PJSku
-      gisvmcuGjVvp8Lj3l5E3Zjzjx03ErASYe8lFrPzwbYhMxS7vJySdYYYFwGy2YFAURk27GFt3
-      KeVN3VgsForSY/nn8y9QWt3C5FlzMQX76e1yg8nC9uJiIiIjhx0gaakp46UXniMlZxyRSXl0
-      VRcz84K5p33mJOloTvleoObaCt7+eC0//I9vyzPvpDPOKQ9Aj7sdrFG4Iu2ncjKSdEIO+lHu
-      am+ivtV9qGGPWWNN7f5nALjik+TCL52xhgdACN55+23eWjj05BA1FCQYDOD3BxBCEAwE8Pl8
-      aLogFAyiC4b+1wVqKIjX60PXBSsWL2FwZOZH2qehqpSSqgYaK3dQXF5/yGHKykoP+ZA+Pehl
-      6ZIlFJdVHXEaxVs2sG1XKaWlpdSUluHp7mQgcIqfRHiSDdsvqfm76QrZSTb3U+f2UrXiFUp7
-      nAy2V3Pr977P3x97jOkzJ9OvxBDd38iF9/yQ9a8/xehLb2Pp228QG2MnaE872gMfpdOgva0T
-      t+omXnNT64+kuaqE2OREOuobMFrMGC0RBPrbqa2uIyU1gabGZiIjYvDbzVx+3mwcAnKKclmz
-      Zh0mk4H+rk6CWElJdNLU3M3l8+dRU1tL3pgpdHe5Eb191DTuQYseR8RgE70hE+ZQDwnZY5k8
-      9sx5JtiXDVsDbF7xES1trTS2dfDe4qWgKHx9/o1cNHMMre5+cosmcMutd+Dv/dIjNg0WUpNi
-      EQYzrS3Hdr2pdOpZTTq6wUZowENjRz+xrkjM9iicDgc2k4LJ5sBpgpKKSlwJCfh6epg+a9YB
-      p0kraIE+groRf0jDoAYoq6wkMTEeXQdbhItJ44ro7e0FIDEpkcTEeCqrqomPjyMoTGf0wg8H
-      rAGEEKzaXs3vfvMrrIrGr3/2C/wTszEccM74ga9dMXZWL19BSXk1qeMq2FnfzfnjUqhu98PB
-      p4xLp9mYSVNQFIGOkUIN/H1urJGxpCSkYNj3tB814MUbMnJenJPaxlYmjBlHxL7PJs45Hxtg
-      UwTZ4yex8dM6Js+dS2yEmab2bmxGmDPnfADOnzMHI2CLdNDa0slNN91E76BGUV7WCM39sdu/
-      F0gIjbY2NykpQzdF8nS0omEkKiYebbAXLA58/QPEx8fidnuIj42mpraeqOhoolxxdLU3olid
-      GISOEXAlJnB2XiJxbmhra8PvH37bQ5fLhcvlGqEanZnk2aDnqMrKSmJjY4e9t3fvXmbPnk1j
-      UyPp6RlH7auFfD2EzC6E141fcRBpCtLp00lLiD1o2P7+fiIjI0/iHJwewzrBwYAfDCYsZhNC
-      1xgMhHAc4tm8wwkCgaFL7KQzh9PpJD4+HiEEjY2NZGRkUF9fT6i/na3bK0hKSWbHxs1EJ6cT
-      6uskZIwgPi4KC2B2mNlbUUtmvBF//DRocePRVRxC4NNUelvrsLmS6etoxBfSsTqiUPy9hBQr
-      BXkZ1NTUk5acRru3n0lFZ/ZFMcM6wQue/iN/fuEtAKq2Lec/fvL7YyrkuWf/efJrJn1luq7z
-      zDPPUF7+xSntZWXVxEVplNU2ERWTigh5MVmdOEwK7R0ddLa10+npItTTQL0nuH88AwLdaMCg
-      dlNW0crAQD8WZwx2u40Iq4I9MpbcOCOrtuxB11XaGppIzckbidk+LsPWAIpiJeTrJiQEW8ta
-      KUyPoqulmjfeW4ZiNHHTrbfx6tN/JCo6lpA5CnzdTLnkOgbczbz44osYI+K48bIZvLrgHRSD
-      kSuvv5kPXnuWuJzx2IJu3L0+CiZ9jQumj2Gwp4XFa8q4/rLpvL34M6xaL+4+H6OmzOVrU0eP
-      VHucUwwGA9dffz2JiYn79+wkZ+czPjGRzo5WTEYHKCoIBQWI9PbQ2NZLTqQTf2I2iSlpOOxA
-      UiKJZkFv0IRJJGC3NhPhchFhs6BpLkxGI/7+Hpr6BJfNGk9FTTPpWWlEneHXA8NBl0QqTBuV
-      zNaSajSzE7Pi4ZN3FzKoxGPqaWbFhp0IaxR33fMN/vHMJ9x/yxW8uLICZ1wad99zL68//Wfe
-      W9xOp1cj0eblo2XrCGDnlvlf55m//RFzTBpO+9AkbdFJdNYtYs/WAAnZRVSseRdrbBpOu9yF
-      dDIEAgH6+/txOBwMDAwAoKoqiYlDlyomJqYcNE5MXCypmUOvE5PSv/jAOrTNH7Hvz8SEQ1zu
-      GBtH6r6XU6ecPTfNPSiiE2fP5fGf/ze3PPQoLU31xMbFkzHmIhK0DkR0Fp21xaAoWM2Wz++5
-      hK+viw5PN+6BEJNy44jIyGZKmonOoIP1K5oRQlAwYTpZqbEsWLyUKeMKURQj00en8fKSHfz2
-      15dC/wwyk6J586NlTB6Tf7rb4ZzT1taG2z38lJaBgQEQAq/Xi80RgdFw5G6wqqoYjUaCwSAW
-      i2X/7VS+TNc0MBg5SnFnpGFPirdYrSRl5OJyxTB90mjsNhtzLryEqp2b8PiNTJk4GofNTnJS
-      MlZbBEnJidgiIsnPSqGydA/TLryKqVOm4K7dQ12nj5lTJ+J0OEhOTUb1drOjrI558+cTFTF0
-      blBiaiqxcUnkZKQQGvCws6KBefOvISriaB1v6WiMRiNFRUWkpaURFRVFdnY23d3d+Ho6cfd6
-      sVrMVJbvxeWKpKSkHLvFhsFmZqC3n9q9FZgioikvLyMlOZlFixYypiCT1xctJSctloa2Lox6
-      gKq6Rjwd7ej9bnY2dBAXG0NjdQUGm5OejmY0gw2b5czeDJK7Qc9RLS0tJCcn8/777xMKhbjp
-      ppvYvn07CgqTp0ymq72RysoSQkoSJksIp2YmY9Zo6rbuxhtUURUTkREWpkycyMbli9GcaRhM
-      BgJdLQSwkZIYC8Eg6Rku9jb0kz6qiMYdK2nz2UlPisPv9zLnvPM4wr23zggHxVMNBfENBohw
-      Oo+6ijycgN+PxWaT5wSNMEVRyMzMZOLEifs7wdnpiWzespUYVxRWRzROh4vgQBvOhATKt+8m
-      2mbFqxuIiYzE6bAAkFk0kZaWTuJio1EdCgOqhfiYSPRQCGekg5hYE/UVe8gsnIReU0dKajKK
-      0M74hR++tAbobCjnjcWrSE6Iob7Fw49+eD8W4/HPxct/+wc3PPADzr7DIueO5uZmkpOHP8Or
-      uLiYadOmjVCNzkzD1gAL33qHW7//Y+LtRmor9uAb6OWVNxagqSFGzbgM4S6jtqWLmNQC7P3N
-      TL/2NnZ8/Bp5s69h9fsLCKgqGWNmj9S8SAfo7++no6Nj2HtxcXEjVJsz17AADKoQaRs6gycj
-      txBdDZCXX0CPp4mtm4vJcvYS0CzERDtpr/egCujrchNQBdl5+XR3dbJ9+xZSz4JV37muqKho
-      pKtwVhh2JPhrUwt59+N19PV28/Rf/n+2b9nA5oo28rLS0REkpBVw1WVzWfrJR5jMgva2Thpb
-      WulpKuOzbVXk5WYidNmnls4ew/oAQgj2bNtARX0bE6fPJi/FxbKlS7HFpBLpsJISY2P9ll2M
-      nTKbjFgLS1esISE5idHjJ1O8bgWKI46oSAcOBfImTsAyknMmScdA7gaVwpq8U4kU1oYF4P1X
-      n+Lld5YB0L53Gz/9zRPHUITg9df/fSrqJkmn3LC9QL2eAWo6KhFcwrote7AoAYK+Xt599wOw
-      x3DtvMtZuvgtunoGycovoGZvFZfMu562hioWvPYvUvInMmdKIYvffRevsDJ//jxWf/I+Xpzk
-      xJvZs7eJ8y+5koKMs+Pe8dK5b/gmkKJQlBJJeUs3Xs2M06zw0Vsv4zPHEGwv58M1OykureaW
-      my9n1Zo93Hz5dD5atQVdmLjmptspX/8xn3y4iLo+hQjNwxvvf8bO0hpunHcJyz9bS8GowqFb
-      KkrSGeKgPsDsuV9j0T8fJ7Vo6IhhKKiTkZXJ2MkzKcxIIDYuFqPFQmJMLBazGaELzFYbVpMB
-      s8mIPxAiLT2D/NGTmFCURaQzGkUxcOW8eagDHpav3HDaZ1KSDmdYADLzC3HFZ5Gels55U/IZ
-      VVjAlTfdSsPuTRSX1ZKSFE9ebh6KwUpuXjqKNZLcjCRyM5J5/bVXSJ3wNeZdcx3+1go2bS8h
-      NSWJvPxcUBQ6muuoaepk7tzzR2peJekgcjeoFNbkblAprMkASGFNBkAKazIAUlg75AWbQguy
-      bOUGxuSlUFHdwMSZFxBjU1m3dgvRSWnY9AH6NRvxdkFVfSuz5l5EhFmeAy2dfQ5eAwjB7uLt
-      aAYTnk43aqCf7l4/BpOd6Agzvb3dbNuxk/7+PuLiYvH1dxPQ5I6kM9Enb/+LytY+3nr+ceq6
-      gvT29qJpKv39/QwO+tm0aSMVW1dS0dxLSNXpby7lzcUraKgupby+llUrNrNx0yaCoRA9Pb1D
-      l8v6BtFHesZOooPWAALoH+inqmQvoZxcxuRl0O3x4IsSRCWl01BaTlxCCqHAIN6gSnqcnc6+
-      ALE2O6quMeAP4PZ58QcDFIkOFLsLQ0Q8WJwoitziOp3MriQ6qrbT7w2wa/MGkpIc9DbU0W1K
-      xq710N3tYVxmLD69gvoaGzMyVHwBFaPqo7k7wGBfH7UNzQT73NTUNxLrisNnS+HGeXPOmW3n
-      wx4H8Pl8WIxQ19yBywY4k+jraCQuJROT6qM/pOAwqrR0++gzCtbWVFHS1kpHfz+aEFhFiH8N
-      PjdUmNmBITYXU9ZsTIVXYojPl2E4DdauXYu3swlLZASKIxUt2INdaGiuAgKeGtTBPuKcFhJG
-      T6N6byvTsw2U+5KYGNPL5tYgwU4fgwMNJMTHM2iwE6P34Rh1AQUJ5859YE/4QFhQU1leUcHC
-      ncW09vUe9PmwAAybogFj5iwsM+/HmDr5gIcxSNLpd9x3LRJCUONx87fVK9nb2YW8+0kAAAuG
-      SURBVHH0EQ4qQEerX89g4ybMY2/A+rX/g2J1Hn85knQSHNd2iBCCmurt/Pj9d05s4T+QrhHa
-      /Ra+N+9C75GPVTpVKnZuo8evUt/YSFN94yEfihfOjjkAQghCJYuIX/Jdpqp1J60CursS38Jv
-      oXfVnrQypc/pBHSVhupa3B4PHrdHBuBLji0AQqDVriaw/FEMWoDv+j5mtNJ10ioh+tvwvfdD
-      dK/npJUpQV9bLS3dIdrb2+SCfxjH1AnW+1vxvnoT+L/o7PYao/i1/XpadMchxzlsJ/gIjLkX
-      Yb/mLygG+XSxkyEQ8GO2WAkFAuiAAljlLSuHOeoaQAhB4LPfDVv4AaK1Ph72f0SUEjppldFq
-      VqJWfHTSygt3VqsNg6Jgtdmw22zY5MJ/kKMGQGvehlr92SE/S1M7eEhdgUU5WStYQWDDE4iQ
-      /+iDStJJcMQACCEIbnsJjrAFOTpQw3e1DRhO0lam6G1C3fvJSSlLko7myAHwdqLVrTliAQow
-      x7+Tmyk5aZUKlbwH8kI16TQ4YgC0+nWga0ctRAGu863jYqX+pFRKa9uFPnjy9jJJ0uEcMQBq
-      87bjKEjnXt9SJiidX7lSqH709pO3RpGkwzlsAIQQ6J7q4yrMIkI8MPgRmYaBr1wx3VPzlcuQ
-      pKM5whpAIAaO/3SHSN3Lw/4lxBiCRx/4CHTvVzzVQpKOwRFPhhPqie2OTFI9PKQsP6Fx9wsN
-      frXxJekYHLEPoJjsJ1xwdqj5hMcFwCwflSqdekcIgIISEX/6avIlhoiz52nj0tnrsAFQFAVD
-      bO7prMswhti8EZu2FD6OuAlkTJtyuurxpQlbMSSNHZlpS2HliAEwZc8B5fSfmWlMHofBIR/p
-      KZ16R+4EO5MwZs46XXXZzzTmWs6Kx4xLZ70jB0BRsEy793TVZWiakSmYR11xWqcpha+jng5t
-      zJiBMeeC01EXACyzv49iPvRFNpJ0sh01AIpiwHbhf4M16pRXxph1PubR15zy6UjS547pmmCD
-      Kx3bZY+c0g6xEpWG7euPohiO+04tknTCjvGuEAqm/EuxXvgTOAV3dFMiErBf+3cMTvn0SOn0
-      Oq47wwkhUEvfw7/iMTjB84S+zBCTg+2av2KMG7mDblL4Ou5bIwoh0Nv34F/6K3R35VeYsgHT
-      qKuxXfgTFLvrxMuRpK/ghO8NKkJ+QrvfJLj9X4j+tuOYooIxdcrQvUEzZ8l7g0oj6is/JVIE
-      fah1a1H3foLWUozwekB86TJKkxVDdAbGzFmYR12FIWmsvPePdEY4qY9JFWoA4fOg97dBcAAM
-      JhRbNIozGcURg6IolO/aTll1O+PGZrFn2zaSc8bQ3d9NcmouU8bm0dGwl/UlNWTGRtDmGaCo
-      KI/yXdtJGTOHyYVpJ6uqkgScwN2hj0QxWVGiUjFEpR52mNi4WALljeQUjMHj6SM3OYI17a1o
-      moauDrKxuAwIEjTGMGN0Mn1RWSQkdzIu//BlStKJOs1PqRC0tXUQYTHS09VGVEImfr9KdJQT
-      EfLT1tnDpAnjsVhsGNUgm8taSbAOYnEmYDbIvoJ08p0xT4pXAwN4QyainfJKMOn0OWMCIEkj
-      QT6oSwprMgBSWJMBkMKaDIAU1mQApLAmAyCFNRkAKazJAEhhTQZACmsyAFJYkwGQwpoMgBTW
-      ZACksCYDIIU1GQAprMkASGFNBkAKazIAUliTAZDCmgyAFNZkAKSwJgMghTUZACmsyQBIYU0G
-      QAprMgBSWJMBkMKaDIAU1mQApLAmAyCFNRkAKazJAEhhTQZACmsyAFJYkwGQwpoMgBTWZACk
-      sCYDIIU1GQAprMkASGFNBkAKazIAUliTAZDCmgyAFNZkAKSwJgMghTUZACmsyQBIYU0GQApr
-      MgBSWJMBkMKaDIAU1mQApLAmAyCFNRkAKawNC0BXZxtdvQMA6CE/9U2tx1CEwO3u3P+X39tH
-      vy9w8FC6Ss3eSiorK/H09IPQ6XR76O12E1T1w5aua0Hcnh4A1KBvaFxJOkmGBWDxv5/nyVcW
-      AVCyYSmP/PnZI468c/0nVLT088aCBfvfq92xjs1lTQcNqwb6eO75l2lubuLZJx6nrXeQsopK
-      Vn+8kJY+9bDT8Pe38ubbnwDQ31LBok83H/vcSdJRmA78Q1GsGNUB/LpgZ20XhSlO6su28O7y
-      rYiQn+tuu5uX/voY2fmjMERnEqxdDy0G+joaefnll3B7BVdNTCbk7eSpFzbz3W9ezUuvf8i3
-      77kNAHtEFKmpqcREORG6RlnFXlLt0FZbyqcfVPD1WYW8v3QDBiG47va7SY9zHqLKgrdfe57e
-      QY3I5AIy7F5213XS2enmu9+9lwX/egWrzYwakcqEZCN76twIxcy999yB1SS3+KThDloiZk/I
-      Zt3mHSj2GAzAso9Wc8f993P3dRewdM1WYtNyuPveb9PTXk9eYQEzZ87AEZfKXXffjVkf2nwy
-      R8Rj9HWwbeMa8ifP3l/2oLeP1tY2hK7S0u4mEAgi1ABPP/kMl151FeuWfQJmG0bdx66ymn1j
-      KQghABC6jqIYMBkV+rwB4uNiSM3IwhXlZKCnjW3rV5E760ruvuMWzEqQT5d9hsVsxNNSR0uX
-      95Q3pnT2OSgAo6bP4YNn/8Kk2V8DIDc3kfVrNrNmwzZyczIxmowoAAqYjEbaOzowGY0oKKAo
-      +0pRuHDmWJ5/byuzxmftL9seEUlKSgrREWZ6BwaHhjRaefinD/PWK6+SlplJRs4oRo8qJDsj
-      BQBrRDx9HZXs3FPCkmVrGDM6B8USzaUXz2Ht6pUsemshmfmF2IwG4lIzqdq1leKtm+kb1MlI
-      z2D8lBkUFY0iLsp+ShtSOjsp4vOfV6CxuoqE7DzqKsspLCqiuqqa/LwcSnYVgz2WMQXZ1NfX
-      k5OdRU1dPWmJMZRUteCKtJGbm0tNTQ0J0RH4jU5soTYWfFLCfXfMB4Y6s5vWryegQUJKJqML
-      sqirb8Jh1olKzKKzYS9xadnUV+xGNUcxfkwBhn2B8vZ6KN5VQmJ6LgXZ6fS6W9hTUUvRuImY
-      tQH2VNSRmpyAzWZhd0kldmOIyrYAd91wKcXFO4hPzyMnIxnl0G0ghbFhAThZhKay6K0FXDjv
-      ZuKc1pNd/GFpIT9LPniPXr/ClddcQ1yk/NWXjuyUBECSzhb7+wBCCDRNG8m6nHFkewx3LrbH
-      sE6wz+cbqXqckWR7DHcutofp6IOcOqVlpaQlJyJMdqwGnX5fkKjICMwmA6om8Hg8JCYm4vMO
-      oJisOCwGdIMFs/Fc686G2Lh2E1mFo3GYBCZHFE21e0lKy8JuNREYHMRidwAKPZ5OYhKSUf0D
-      BHUjrkgbARVslhH9Kk+Z7qYqGv1WUm1BGvoUshIisEa4MCkhQpoB30AfQX8Ao91GUkIiRsPx
-      LRsj2mpC1+loa6Ot20dCjBOTwYy7x0NWrJ2WfoXu9kZ6+70EgzpRdgNCMZKRkzOSVT5ldF2g
-      6IMU76olMiYWp81IW3MjqhogKzWB+pZeRFDg83bR3uNF8/WSlBBHt0cQn5qFbaRn4FRRTAg9
-      RH9Aw2ky0tbaQn+oDbsSIt7lQnEloPb2YrKZaHf3kproOq7iR+jQqKC5vga7M5qgqhMR4SDK
-      FUNUpBOHxUhtYztaMECEMwqL2URaWgppqYn0+IKYjzPhZweF9KxckhOTiHNFkZKchBbyoxvM
-      xMYnEhnlYqCrA6GFMNkisFlMpKSlkZqRgdvdS6T13Pz1BzCaLSRFWdHMTixmE7pQcNhtJKak
-      EhProqujHbPdSUx0NJYTONK/fy+QEAK3243D4TjpM3Ey9LjbMThcRDlO325Vn893xrYHwOBA
-      DwNBAwmxUadlemd6e5yIYT8dJpMJs9k8UnU5ooSU9NM+zTO5PQDMMQmcnkV/yJneHidiWACM
-      RuM5N4NfhWyP4c7F9vjS2aAKinIubmOfGNkew52L7fH/ANCF2sD7RvjNAAAAAElFTkSuQmCC
+      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
+      sX7NRqrLDzJ/1lw6otBWW8ILf/8HS//yFN959H+PaXVklr66lCsXXDkgrssXLiRQf4S50ydS
+      2xVh6/K/ce3t30WJBnnmmadYv3YlT/zPc7TUVbCn6AAb128g4O/hmaeeYv3aVXzvO9/mcE0b
+      O9e9xo233cM//vosV8+bw/NLlvLLn/2I+dcupisYo6mimCX/WMaTT/yEH/36WaoP7+LKK67m
+      t0/8Jw/+7OnjflSKdm1j/drV/OJX/8f9Dz2ERQdH9m3j1dff4rEff5///etbCCAW6uXVJX/m
+      xgVzWburnJ6WCh758c94+59/4VuPPI63u5U7r5/F48++iUDmyV/8hL0llTzzqx/w6NOvgBC8
+      9uLzrFy7nsd/8gj/fP8DWuvKmXf5XP749K+5+4FHj2u5ly9fw5N//TulG5ZR29XXBrfWHeXK
+      qbNZ8vo/+PqXb+J3S96DeIAf/PvDrF71HrffeT/hYw6ZuttqmT+lgOfe2gbALx95gN1ldbzw
+      x6fYsHE9P/n5b4iFfPz0+1/j2dc34m+r4qk//pn33/onL/xzxRn/OF8Ix7VP/t4AFpPluAVz
+      Rk7h1z95mP37i1FiIcbNupoRVh/LNpdyy4038PDDD2I6plWWNDomjxlFOCYjx/ysfGcVhuRc
+      /vWrtzO8cCxup5sbb7mBgpFjsGkEIHj6fx7n6sV3cc83HmDuxBHHrF3B3xvCbDYeH1fBGLJT
+      nYCGKdOnowdikV5Wv78akzuPb957G8MLx5Ca7OaGG29kw7I/EU0ey8KbF/Ovt8/n0cd/x4Qp
+      UwEt9377QR799leo7Yzwy988yeRkQUVzN3985knsrmQmTJtJVfF2kkaMRS8r/NuPf8Oz//XI
+      cTHljxrHmNGjyB+eydaNGwhEYjzz1J9wJbmYPms2+z7YRFQGjd7MPfd9h58+dA+bPtwJaLn5
+      1tvIyclk/7btmFxZPP7YTzlSehBJkRk2cSYzJ45i/OjhRGWFzpp9LNtyhEU3L+QnP/0h//Xo
+      j7BlFuIwKtz2rz/ijT//D8ceWSrhHhr9OtKS0vj64tm8sOQNBJAxfBRmvcy1i+7mD7/9Ges2
+      bgAhmHf9LQzPzqS9tIj20KcJ4M7M58nf/IIDRfsAmfTR05k9bjjrVr5FEBvf/8596M12RuVl
+      ogBdzTWs3bSDUZctYNGCGafeIy+wgQkgwewrZrN7374Bb8uRAMGowuL7vsvmZc+xZsV7zL7u
+      ZvyeZqqaOxACxl02j4kFGZ8tDgCdyc0Lf36SV576KQ/97Knjj9slAEFjfR1dPV50Jjt3fWkh
+      MeWTBfTMvmIGe/bsH/CLFosECUeVz5aGwZbOc3/4LS89+RMefuxpjj2/rq2tIRrp++UbNqIQ
+      X6enbw16HRKg02r55LBVr5WIxWSam1uZPPMKblp8B8te+RtWoxazwYT+JMfhriQ3w/IK+NHP
+      f0nT9uXsKmukqbWdOfMWcNtd97Pk+d+i04BWp0fSSGi1GoLhCNFIkA82bWLUpGmYdX21N2Hu
+      LUQrP2D5u+8zfvZVSNB/vtTW2ECXPwQCDI5skg0BQrKC1mDFZDg+tg3vvUlqZjqrVq1i5NTL
+      WfqX5wj2V7IOvU5Cq9USicWJxaLs27EFa0Yh6Unm485jZt98L00fvs6mNe9RMOM6QOKFv77M
+      tree555vP9LXqfFxoMOmXMOvHvoKD9/3Zf6+fPMJ62yofKYFkHjwPx+nZM1LvPr+FiLRGN3t
+      Taxc9yEGvQad2c23bp/DM+8UMS0vmeT8y7A27ODXz/yFN159id2HaxGyTDgWQQiBrCgIIYgG
+      m9i+t42/LX0bm7+WkCJh0EQ4uO8A/qjy8XIStyy8gR8+/CArV63kLy+/hfaY6B76yRMceP+v
+      vL7qAyLRGJ7WBtZt2oFOpyfZaaVofxE79+yly9NGfXUpu8o6+PvS5dj8VQRlLVolzMHiYhbc
+      fCdrli/DF4pScugQX73/6yiKQiwWRwgx4J8i+uK/8apZ3Hfvv/D6m2/y3F9eQQhBJB5F/kxP
+      ihAK0UgURZFRZJmi7ZuQ08cwMT+LeZfl8bX7vsNbb77Bi0vfAzlOWI6DEAjR18O1a8MKmnwK
+      teUleP0+ausbQWPge9+8gxff3cn44SkAyHJfXKOnz0dqLuZQbRvdTWVMWvAV3CYd8WiEuDzw
+      h0GJh9hxpJVv3Xsnt956K3fd933m5oZ45b3tH2+vjKL0xSEUQXPJLrYerCfYUU9bt5eKimri
+      cpxILNbXs6Ux8MPvfZVH/vc1rp9ZAAhWrNvE755/hWkZMp2BvjoQQnBk2zqUzCmsXP0Ohz7a
+      dj7243Omfeyxxx479g2D1cXXvvoVKg58xPpNWwkoJm668Wp0mr5szkoyYcmZzORROUhaA4tv
+      W0z5wX2kj5rO9fOmUbp/H5iMpGQOo6GhGqPRTOHosZQf2EVDWxs3f+VectPdjMzPoCukx6UN
+      EkaL1ZnKjYtuI8Mco6rZy9e+fg9Ww6c9SCZ7Mnff9WXK9+9g/eZtRDQWbrjuKnQaiWnTpvHR
+      hzuZu+BaRhUWMmH8aA7v/YiGljZuuuNfGJ6RSn5eGj0RA/OvvIo547JZt3kb7hFTuf26OZQU
+      FyHpTLjTUqlvasFoMJDitNAViqI3Wvny3V9jmFOiurGLr379Xjpry4hotOgtTvKy0/tjLNn/
+      ETG9m0BPO9UVR6jpjPCb//o1GUlW5lx1A2bZS6s3xr333k1N6SEkow5nUgpNTe1YDDquW3wn
+      3oYyssbNYlK+m8LxU3FYTeQVjmHSxElkpLogHmbfoUosei1jJ83grtsXsnndWjr8gu/+2/10
+      1JcTiinEJQuFI7L7W+Gi7Rtp642QMzwfp82C19OKN6Il2OvBqJXQW43oTEl4WhqxmS1MuuIa
+      0rR+wqZ0rl9wGe6M4TTX1WDU6Rg2ohCnzUJOTgqKPp0508YAUHFwN5UNbVx+3e2MybRwsKIJ
+      g1bH+Alj+WjbFto6vHzj29/CYTn+UHaoSEKc2agQcjTI4fIadm3dyNce+HesutP0W6q+sIQS
+      o/jgEUr3fMCCux8g037iru5LwRl30vo763n8sccYc/n16s6f4JRgF//9xC+xFs66pHd+OIsW
+      QKX6IrrIL9OpVOeXmgCqhKYmgCqhqQmgSmhqAqgSmpoAqoSmJkCCKtqxmc5AjN1b19AZOPFT
+      CWXlZSd83+tpY82aNdQ2tp7PEC+IS/sqhuqcdfu8BEtKKd+7k6gtl3BXPQ6rlc5QDGISdqeD
+      uvJ9NDR34DQodIXAJIJYUnOZOWU8sqyQaZfZc6gaJVhLS30AZ0YKetlPRGPjmvlzhnoTz4ja
+      AiQoyeAk0HCQpNyRNFYfJSSZ0cl+UofnYdbbiAZ7cbrTiYX8HC4pwel04AvLzJg8rr8MgyOL
+      +qKVmFNz0eht+Ho8lJSU4nTYh3DLzo7aAiSoy6ZNIx6biFGvQWu201BdSXpmJlqjCTk1DZDx
+      etqwJGViENPp9EUZU5jXf4vz5ZfPARFD6xzBhBEpFG8p4pY7FyFC0/DHz/VxzQtPvRUiQQkl
+      DsoxT2ZojUinezD7C0g9BEpQ0b1L8P9hev8/lBgAGzZvOOlIFscKejtobG2no7WJ4tJyejpb
+      2FV04ITLVtbUDmbog0o9BFL183Y1U1dbR1NnD9s2rCI1I4tQIIAsaUnPcpFqthHRWagrP0x2
+      egpxoxu7FKaoop7uDiuhSJC1a5rQmaz4/T0E/X6MZgcGvY6KI4dJzcigrbUFl9NJkyfAl265
+      Af0QjxqhJoCqX1HxIUaPHs3B4n2kZuSgJ4bkTAI5Tld3N+FOD60BGZMcoL4pQla+G4Aks5He
+      iIwRmfKqOmbPmo3WpMNs1GHUmYhKBrJderbu3kth4ShikRDTps8e8p0f1HOAhCW3FBNv3Nv/
+      2nDZ/fT29uJwuujp7UUjSUgIBBpAgByjpb2TjMwM2tvaSE1xYzBa0KCARkMoHEMryQT8PtAa
+      sdksCDmOJGmIRSN0eQPkD8+h/OhRsrNzMJqtmAxD//urJoAqoQ19CqqGxIbyMt4vOdT/+v9u
+      ux0NgoPFB8krGIXLYTvl9zu6OkhJSqG6upL8/EKOVlYweuSo45aLhvxEFB12q2nQt2EwqAmQ
+      oLqCAY52tPe/FgI+2LaFcZMuIxbys3X/HoYNH05NdS3DcrJxpeXgaanH2+3B4U6lvq2GG+bd
+      wNJXX+ah//gPlrz+Ft+663YamttJTXbQ0NSKyaDF7bRwsLqNGVOn4GlrxJGcRmdzDaMnzSIj
+      JWkIa6DP0J+FqC4akXgMu81KwN+NLGT2FR8mGo1QW1tFZ0+AsrJiOrt7OVBa2v+dqZPG8feX
+      X2PylMkU7d2NpMQ52tRBhttG9pgCmhpbmDR5GodLtlFW3YTf5yMaly+KnR/UFiBhZTqcTB82
+      vP+1JElcefk89uzaSUqKG53exKiCDHp7uhiRn8/R8lJGjZlEV0c7Gc5huJP7DpEmTZ1DVl43
+      DmcSkhylta2LiSOycBi16G02dOMmUddUy8yZC2msKcfpcpGTmTZUm30c9SRYldAGHAId3LmZ
+      v7+4hCUvvsi6D3ajBDvZsb+8//MtW7ectkChxPnwo1PPCaBSXSwGJEB58R6u/tL93Hf//Rz5
+      YCWeqAadTks40MOuXXv4YMdOhBDUV5Vx4HAZihB4WhvYuWsvoWjffSVCkdmzdzd7d++mNxih
+      uqoKIaCjpQFfKDYkG6lSncxxJ8HLly3h+eeeQ5deiFPuYs+hCv783PNYrCYam9ppKNnJu5v3
+      09NwiDdXfcjzf/kbOkJ88NH+/jKaa6sxmAw898LfKNm5kaOtvax45z20evWUQ3VxOS4BvnT3
+      fSyYMQphsKOlb8DXmNbExPETGD9mBLU1lQQCPlp7YqS5rSy85ko+2rmXDo+nv4yCcZOYOHEy
+      einCldcsYMvKtxD2TCzqiHKqi8yABNDpDWgkidHTr8HYVcKRxm4MegNjcpL589/+TkllE1Nn
+      z0cX8+Ht7kTSGijavx+r3Y5er/+4FInmqiMs+ftfycybgD29gK6q/cycf9WF3zqV6jTOey9Q
+      U005b63exoPf+5Z60UF10TnvCdDT2QZGOy778bPOqFRD7bgf5a72JupaOj9XoQ01tf2zwLhS
+      0tWdX3XROm6SvOVvvskbb76JAOKxKNFolHAk2jfTSzRKMBhEVgSxaBRFQCwWRVEE8ViMYDCI
+      IgSbVqwkODTbo1KdlQH9knK4G0/MTKbeR21nkMpNL1PaYyXUVs3d3/kef3j8CWbMnopPSsLp
+      a+Cq+x9kx7LnGHvNPax/axlJLgsxSzZqX4/qUjGgBdi9eTUtrS00tLbz7vvrQZK4fvEdLJg1
+      jpZOH/ljJ3LX3fcS9rZ8+iUBaAxkpbtBq6eluf4Cb4JKde76E0AIwdZ9VfzmiV/w6C//i67y
+      nYRl0BwzUoAkfZovriQzH2zcRHFZFd7mcorrekhLshGLq7cWXezi/k7Wb99LqLuF9dt2n3CZ
+      yrIjRJUT/y1L9m5jzcYPT/o5QP3Rw+zYs4/qo6U0NzVS2dhGe3v3oMQ/mPp7gYSQaWnpICur
+      b6pTT1szsqTDkZSCHPIi9BZCfh8pKW46OjtJTXZRXV2Lw+XE7kqhu7UejHY0KOgAV1oql87o
+      MIkl0lHBH5fv45pphRyuriHXbScoLGjlXoJhBYOkRdHGcdgtGM3JdHraSXfaOFzTwaJbF2Px
+      VfBhowljqBGXWU99lx+HNobBkU5XZxMFk+bSc2Q7XmsWueYYMY2ByvZuWirbmT2jgIbGFoxW
+      G0abnStnzxzSuuj/SZckbf/OD+BOzyItLQ2TXoPVkYTNbCQ1NQVJkkhLTUXS6ikYOZLU1L5l
+      MoflkZnmJj0tFbe681/0CjKcHO0IYtJJVFRUkuJOJiJLJNmtpNttRCQtOZkplB0+jF82YjcJ
+      sgonkWz99LQxN0nPnjovIhIkM9nC/gMHEeYkbAYJJC0Tp16GNhYgEhc4klLJzs6gtvIoSWlp
+      +Ht8zJw1tDs/fOY6QDQSBo0Og16HUGRCkRgW8+keZRNEI1EMxotn6kvVqSmxMMGYQjQSR5Jk
+      NEoMXwTsFiMajQYtIKPQ0eklLy+H+upq3GnpoDFgtxpRYmECMQl/ewX1PUZ6msoYNWEqecMy
+      qK6qITsvHznsx2B1ooR6kSUdMlp8njaSU1JobG4jxZ2Mw+Uc8oujAxLg5d8/QbOpgP/8zj1U
+      7lnPr175kJefeew0RQj+9Mc/8v0H//38RqoaND09PfT09Ax4z2QykZ6ennCjww3oBpUkI7Fg
+      NzEh2HOkmdE5Drqbq1j27gY0Wh133H0Przz/OxzOZOIGByLYxbSrbyPgaeLFF19Ea03hjutn
+      8I9ly0HSsvBLd7Li1b/izpuAOeahoyfAyCnzmD9jHGFvMys+OMKXrp/JWys2YVJ66fQGGTVt
+      PvMuGztU9ZEQuru7sdsHDmB75MgR0tPTaWpsJDM7e0Dnx8l4vT04HFYaGzrJGZZOXV0DeXnD
+      j1su4PNhstsvysPiz9yfLDF9dAZ7S6qI62zoJQ9r33mTkJSCrqeJjR8Voxjt/Ms37uRPz63h
+      gXtu5MXN5ViTsrnv/m+w9PkneWdFK21+mQxTgFUbPiQiTNy1+HpeeOb/0CdnYzP3rdLoSKej
+      9m1K9kZJGT6ao9vfxeTOxmZSb5k+34xGIykpKQA0NDSQnZ2NxWIBBPVlRYS1DqIdlQQVI26r
+      lpZOHxm5WeSl2WlqD9PWUk9WXiFtjVVMnlzArl0lOHRBiqva0CgRukNg08Vo9XjRS1rsFjPe
+      WISCEQU01FSTkZtLa20doyZNHfK/93GHYJPnXMnbz/6WMTPmApCU7Gbm3Ku58YYbmDQ6D6PB
+      AJKE0WBA+viSV9DXRUdXDx5/jKw0N5OmX87CG29gxuQx6HUGBIKRk2dw1cyJrFq9Hug76Z45
+      NpslK/czZ3IBo6fMZP6M8axes+ECbn5iW7t2LStXruw/7PG31dApO6ivLEXSWbCbJEIxGJHk
+      oKa9nXjER21VIyFZprKqqr+cLJeRPbW95LpNlJYcwR/wERFaLBYzhRl2ehUDkyaP5/CH62gN
+      xOn1dqM3u4Z85wfQPvbYY4998sJgMJI+LB+XM4kZU8diNpqYu+AaKg7spDOk4bLJ47CYTWSk
+      Z2I0WUjPSMNktVOQm0l5yUGmL1jIZdMuo7PmENVtAWZOn4zVYiYzM4N4oJv9pTXcsngxTpsZ
+      gLSsLJKS08jPzSTm91B8pI6bFy/CYTUPVX0kBJ/Ph91uJzk5mVmzZqHT6WhpacHqSmHypPHY
+      zEbsdjtWmxWr1YbFZiPFZaWiuonsYVlEwxGysjJJdjmxWOzYXKlYDAJ3iptklwNJbyYjLQWb
+      zYbNZsdkMVF1tIops+cS9XpIy8whyenEbB76jhP1ofgEVF9fT1LSwGFJDh8+zOzZsxP7JBhA
+      jscIhiJYrFa0mnOrjGgkgt5oVO8Jukj19vbS2jpwfq+2tjYAwqEgWr0Rve7Up6xxWUan1RKJ
+      RDAajUQiEQwn+JsLIVAUBa32YjwF/swhUEd9GUuWvkNrSwNrN25n+szL0J7DL8I/nn2B/Fkz
+      GfoGTnUi8XicMWPGkJ2djdPpJC8vj2AwiE0To7iqCbPZRGN1BVqzncbqMjRmC9FgnEg4SGdr
+      I96QTHV1JVkZGWxc8Rap+eNYsXQpI8aOpLy8ErvRwNHqSrw9PQitkb07tmB2phLobqMnGEfE
+      AvT0hrDZhv42+QEtwFtvLOfu7/2YFLOW6vJDBH1eXnntNeR4lNGzroOOMqqbPSRlj8Tia2b6
+      4rspXvMq+XNu4YP3lhGJxxk2/tKYHE0Fu3fvZseOHTz00EMAtLZ3M2HSROxSiMojflp6DmBS
+      4piTLHQ2aUDTA3KEhs46sjL6hkYfPmokVft3YEnO4dD+fciRMAc7feROSKOhEcJN9aRk5tBY
+      W0FrcwNmZwYWXYxpM+cO5ab3G5AAwTjYTX1NVW7+GJR4hIKRI/F6Gti7az/DbT1EZBNJThtt
+      tZ3EBXi7O4jEBXkFI+nubqdo726yhvrynuqMuFwuvvGNb6D5eJz+/FEF7Nm3h+zMFITOQJLN
+      hCYSIRLVEfTVY3AlISlBkpOScDmdANidqfgDLUyekI3WIGhu7SbT6cZhc5DmltCho6mmAkfG
+      cLKRMTnSsVm0GHQXx04yIAHmXTaKd9d+yMLLx/PSn//E9Jkz2F3WwU3Th3G0rZXUnFHMKsjj
+      hReXMS3XQXtbJ41NrWQ1HmHzvgruuHYSh2t61BFHL3JCCGRZpqCgAABZlhFCoDXamDNnNgC5
+      eQO/U5B7/AUugOycYWTnDOt/nZPz6We2HIAkhvW/mT84GzCIBvQCCSE4tHcH5XWtTJ5xOYVZ
+      LtavW4cpKQu71USmy8iOPQcZf9kccpMNrNu4jbSMdMZOmkbR9o1IFjcOuxWrJCiYMhnDUG6Z
+      6qQaGxvp6OgY8J5Op2PChAkJ1wukdoOqEpp6sKJKaAMSYMU/n+el5RsBaK8s4tFf/+kMihAs
+      W/rq+YhNpTrvBpwE93h8VLeVI7ia7bsPoZPCxIJelr+7AkzJ3LboetaveBNPT4i8kSOpqqjg
+      2pu/REt9Fcv++QqZIyczd+ooVr77Dn7FwOLFt7B93Qp8wkp+qoFDRxuYe81CCoddPOPDqxLb
+      Zw6BJMZk2ilv7iYg67HrJVa/8RJBfTKx9iOs/KCYopJK7vrK9WzeepA7r5/Bqq17UISGRXfc
+      TdmHq1m78m1qvWBTunjtvc3sP1zFl2+5lg2btjFqzGi6PZ9vzCGVajAddw4w58q5vP3np8kc
+      Mx2ASFQhZ1gOY6fMpHBYKsnuZLQGA+nJyRj0BoQi0BvNGPVaDDotoUiUzOxh5I+exKTRudjt
+      TiRJYuEttxDt7WDj1h0XfCNVqpMZkAC5BSNxpeSRlZXFFVMLGTVqJDfdcTcNh3dzoLSGzPQU
+      CvLzkSQjI/KHoTHaGJGTxohh6Sz9xytkTJzLokW3EW4tY9f+EjIzMygoGAGSRHtjLTVNnVw5
+      /4qh2laV6jhqN6gqoandoKqEpiaAKqGpCaBKaGoCqBLaCZ9KFnKUjVs/Ylx+JmVV9UyZNR+X
+      Kc6H2/fgTM/GpPjxySZSLILK2hZmX7kAqz6xbqJSfTEc3wIIweH9+4mjo7PDQzzqo8sbRqMz
+      47Qa8PZ2s+9AMT6/D3dyMkF/NxFZ7UhSXZqOawEE4PX1UllaQWxEPuMLc/F4PISc4MocRv3h
+      UtypmcQjQYJRmWFuC+3eCMkmM3FFIRCJ4AkECEUjjKEdyeRCsqaCwTJgdGmV6mJw0usAwWAQ
+      gxZqGtpIsoCwZdDbWk9KVi5aOYgvKmHRxmnuCuI3SGyvrqSkpYU2vw9ZUTCIGK+E/tpXmN6C
+      xl2ALncOutEL0bgL1GRQXRTO+UJYTJbZeLScN4uLaPZ6j/t8QAIMWKMGbe4cDLMfQJs5JeEe
+      wFBdXM56aC4hBLVdHn6/dTNHO9rPfo1CQa77kFDDTvTjv4xx3iNIRtvZl6NSDYKzSgAhBNXV
+      +/nx1r2EYrHPt2ZFJnbodeSWYsyLnkbjGnb676hUg+yMD8SFEMRL3yFl5beZFq8dtACUznKC
+      b34Tpatm0MpUqc7UmSWAEMi12wlv+CUaOcJ3gmsYI3UNWhDC10LwvQdRgp5BK1N1ajFfO6u3
+      7CLY1czqLR8d93mvpwV/ROHw4cP97+3esZXiknKOlJZScvgwXW0thOULGfXgO6NDIMXfRnjN
+      o6D0TX9tFFEeCa/mF+bbaVEGZyBb0V1HeP1jmBc9jaS5OIfR+yJRwl5Kj9aSYeU7EG4AAA8F
+      SURBVNPS1dHI1o1rCSkGdEqYkD+CxRRESZtBd0URFdX13LboJurq6hgzJYuO9jb8fh8tZUVY
+      xs2jt7II2ZyC8LUyfNwMJo65+IY/OZnTtgBCCCKbf4MID5xRxCn38qPwKhzS5zwXOIZcvYV4
+      +epBK091aoWZTio6ghi1Ev5ghFjYTzgqSLGacKal405OxuZ0Y9IJBGB1upkwdiR+vx+AjIxM
+      kpNdNDa3k52ZjqS3XlI7P5xBN2i8aR+h1++n7xLZ8UqMBfy37jqiYmB35km7QU8XkDMH69ff
+      QdKfbm4y1eehxKOE4wqxaBwJBS0yYUWHUSuhkcBgNtHZ0Y3N1vd3sFrtBAI+rDY7AV9fAlgs
+      Bto9vZh1EEWHWa/DZr+0evROeQgkhCC2dwkn2/kBxkWq+DfJxrOaOSiDMB608DYSr1iLftyt
+      n7ss1clpdAYsOuCY3xnrZ5bJyEgd8Npm65tW6didPCMt5TxFeGGc8hBIBDqJ1247ZQESMDdc
+      zB2UDlpQsZJ3QX1Q7fxTotTWNUMsSJffT3eXf6gjuuBOmQBy3fb+E99TkYAvBbezQKoblKDk
+      1mKU0OD1MqlOrLWumqqmZpRgJzXtHdTVnMOFzUvcKRMg3lR0FgUpfDO4nonSIAx7Eo+gtJV8
+      /nJUp1Rd34jS3URzT3ioQxkyJ00AIQSKp+pkH5+QQcR4OLyaYZrP35Se7bpVZ2/kuClcd9NN
+      mAwWclPc5ORe2sfz5+IULYBA+NvOukC77OeH4dUkaaKfIyxQ/InXHF9oqakpIOlJycwh1eEg
+      JdUx1CFdcKfuBYqfW9OYEe/kEWnjOX233zmuW6U6G6c8B5B0536VNy/WdM7fBUCnzjCmOv9O
+      kQASknXojgk11tTTL6RSfU4nTQBJktAkj7iQsQygSb60LqmrLk2nPATSZl92oeL4zIoNaDIm
+      DM26VQnllAmgy5sL0oW/M1ObPh6NJfG65FQX3qlPgm3paHNnX6hY+unG3Qrqs8KqC+DUCSBJ
+      GKZ/40LF0rdOewb60Tdd0HWqEtdpnwfQDpuJNm/ehYgFAMPs7yIZLBdsfarEdtoEkCQNpgWP
+      gtF+3oPR5s5Rb4NWXVBn9EywxjUM07WPndcTYsmehen6x5E0Zz1Si0p1zs5wVAgJ3cjrMV75
+      IzgPI7pJFjfmW/+Axp4x6GWrVKdyViPDCSGIlSwnsvnXEI8MTgCu4ZgX/x6tu3BQylOpzsZZ
+      D40ohEBpPUR4/c9RPJWfY80adKNuxLjgUTTmpHMvR6X6HM55bFARCxE7+BrRolfO8rZpCU3m
+      ZIyzH0A7/Ap1bFDVkPrcs0SKaIB4zTbiR9citxxABLtAfGa0JK0RjTOrr5dn9E1oMiaqY/+o
+      LgqDOk2qiEcQgQ4UXytE/SBpkcwuJHsGksWNJEmUHSyirLqd8eNyOVxURMaIsXT3dpOZlc/U
+      8QV0NFTyYUkVw5NttHT6GDO2gPKD+0kfcznTRucMVqgqFXAOo0OfiqQzIjlz0DhPvqMmu5MJ
+      lzUwYuQ4PJ5eCtKtfNDaQlyWUeJhdh0oQ0OUiCaJmWMz8NqHk5LewcSR2YMZqkoFXPBJ8gRt
+      re1Y9Rp6ulqxp+QSCsdxOGwo0RCtHd2MHzcGSdKijUfZXdpCqjmM3upGr1HPFVSD76KZKT4e
+      8eOP6nDZ1RHhVBfORZMAKtVQUCfqUiU0NQFUCU1NAFVCUxNAldDUBFAlNDUBVAlNTQBVQlMT
+      QJXQ1ARQJTQ1AVQJTU0AVUJTE0CV0NQEUCU0NQFUCU1NAFVCUxNAldAGJEBlyX7Ka5oBiPm7
+      2Lrj1PMEK3KcWFzmyJFPZ4nvaWukubP3BMtGWLfyPd577z2KSioQikxp2VEaqsvwReTjlv9E
+      POrnSFk1AFG/pz8+lWowDEiAHRvWsPTdlQDs2baR195bgxCCbk8H3V4fQgh6e3tobWkhEpPZ
+      9O4/2F3WxKaNG/B0tOEPhmmtPERJVRNefxCEwOvtSwY5FqDocBUzZkxn97o3qO0M4vP5Kd61
+      BY8/TneXB6V/XZ/OMxwNedi0dTcAwc4Gtu4uJRYJ0dzSSiyuIBSZ9taW/u8EfF46u7rx+f39
+      nwXCn2/KVtUX14BRISRJj0MXxxtRqOoIkuc2Ubx9FXtrgwhvA9Ovv5Olz/6GBdfdQEWLn5Ro
+      C3p7Kz2t9ezYs48Dh49y5xWjUeJB/r7kn3z//ltZ9vZmvvONuwDwtDWxe/ceOv0KLouGFXuL
+      yHfBoV2b8UUkJmZq2Hm0C12ogxk3fIUJeWknCFmw5C/PkpVXiF82k20K0hEzUla8l3u+fi9v
+      vbWSvHQrdQET+dYQii2dxtoa7v+3B3CY1IF3VQMddw4wf9Z41q9bi+HjoU327i7jy1+7k68s
+      WsDu/aXkjhrPwoU3Q8RHZnY2o8eMxpmey6KbbsJp7dvBtEYnqYYI69ZvYsb8q/vLdqdnM3Pm
+      TKYUpLGvpO+wRolHWbd2A2MnTaZ4717C4SCKpMXb4wVAkrQoShyAeDyGVqdj0oRxHCk7iqTV
+      4kxKwtvVSa+3myMH9jJuzrUsvvVWnGbYX3yI3q4OtJJEb1Cdd1h1vOMSIGfcLD5YvpTZ8+YA
+      MGPWON54ZRnL3tvMzGnjBwxlaLNaOXzw0AmHN7zmypms2FbO5PxPpzvtawF2U93USbKzb74B
+      jc7Awz/+T9a+/gqjJk1Fp9Wj10g4XU4ATNY0NMFG3nx7Of98ZzOXzxhPdW0TY8aOobmhjp07
+      PsKZ7EYnQWbBeEp3rOPdd9+lJ6gwZeI4zI4kJK0Wu1kdbUJ1vAGjQgR8vZhsdvy9vTgcDnw+
+      H3a7nd6eLtCZcNgs+P1+7DYbPr8fq9lEd28Ag16L3W7H5/NhMuiIo6WxbBdF9Qp3LboSACFk
+      Oto7UASYrXacNgs+fwCdRqA32YgEezGY7QR93SgaA0nOTyfkkOMxPJ4uzDYHdquZWDRMV7eX
+      pOQUNCJGV48Pm9VMNNDF5l2lpNsUanr0fPXWq/F4PJhtDqxqAqhO4LwMiyIUmZ07djB19uWY
+      dBduDFChyBzav4euIMyZPQOjXh1/VHVq6rhAqoTWfw4ghCAWiw1lLBe9aFTtTj2dS62OBpwE
+      h8ND01MSiVwalRaJDM6sOGcjGPDR0dmF8nFDHY/FuJib7KGoo08EAwEEEAr6kZUTL/PZH/mL
+      omO84mgFWRlufBGBw6zF0+MnI9WN3mwhEgrhaW8jOS2TgK8bjd5CistCRNZiNRuGOvTzrrau
+      nsysHIK9PXT0BJCiQaKSjqyMNLy9vVgsFnQmO7HedvwxCZfNhN/fiz05ExEL4XA4hnoTLpjK
+      I8VkjZpK9f7tDJ88n96OZrKyM+nydGOzWegNRAj0tGJxppM3LAu4SO4FkjQSvb291NTW0uPt
+      JcUK9Y1tBCNRWlubCYRD1FRV0xOIYlCClFfWo9XrhzrsCyIeDePp6qaysoKeLg9xtGS7TZRX
+      1aEx2ujsaMMTkOn1+WioraWxuYWUtAzaGirx9ASGOvwLyuHOoKupCpPVRdDvIxTwUltTTUSY
+      6OjwkJOZhtFsR8iftlJD3gK0tzRgcyZD1IfL5cLhdGHSQ6pW0FRXh9NhIy4LnFYrziQXSXYT
+      9W1HMekSY7j0tMwcMtLTaWvS0BOKY7cYqG3xMjw7A5vDiuzX4/N5MCPhcDlJSU3DoDcQj0TJ
+      HnGiK+lfXDaHk4CikJqWQjAKBpMZm92Jw+Ug4otQ39yGy+VC8Om+098LJISgvb0di+XinqU9
+      0NuNorNgtxgv+LqDweBFXz99ZFpbPaRnpHGhfyYunTrqM6AFsFgs2O3nf0b4z2Oo4xvq9Z8p
+      u901hOu+NOoILpJzAJVqqKgJoEpoagKoEpqaAKqEdspuUCEEB7avxj3hWsJNJdS09DJtUgGl
+      ZTVcNvtyLLo4WzdvJSNvFL2tNcjGZJKNcerb/Vx9zZUkSE+l6hJ22hYgL8tNd1Am2e3G2+Nl
+      /74DSEoEry9EsKWM9PHz8XY20hsM09RYTUdXFw6lg6rOS+P2BlViO00CCJqammlqbsIfCGPX
+      xtE7nDhcTjxtLcQNLuqP7CMm9GSmujEYrIwYPpy2XkG6IzGu1KoubQMuhPn9/gF9uEIotLe2
+      gs6I1aglIksku2x0dvagiQfQubIg3IvZ7iLo68ZocUA8RFTR4rRbh2yjzpdPHhBSndylVkcn
+      TAAhBKK7dnBW4MhC0l34q7bnw6X2xx0Kl1odnfgkWCgEXlo0KCuw3LMUbcbEQSlLpRpsajeo
+      KqGpCfA5BbwdLH37XeKRIB9u28LmbbvZuW0T+w6VAVBXWcpbS1+mpKqB119+kyhx3n3jNQ59
+      PNqdamipCfA5WZ2p5GaloDOaSXbYyMpOoraihZb6OqIKDC8cS05eIWPzcyjMzUYoCu7UNFpa
+      1SEeLwZD/jzApa6nvZGyI2UkWYzsK61h2rTpZOelEFJMtDY1kWLX4UgbTqjXw+GjR9BluJG0
+      GnSSWvUXgxP3Aiky/t9PHpQVfJFOgs+2h6O7p5skV9J5jOji88XoBVKdltxVjdyw55TLWIFo
+      3anLkUxO9KNvHLzAVGdFTYBzJDcfILLp8c9djsZdoCbAEFJPglUJTU0AVUJTD4FU51112UFq
+      u8JMKchky94SbrliDG+uL+WKebMYnpHM2hXLSR42GhFop7Xdy9RZM6g8Uoo7p5BJo0ec19gG
+      JIAsy8TjcRAnGVbrHMiygojHB628odRfP4CiDE4dCUF/mV8Ex9bRJ3LzR9PUvQ+HO5NUVy0x
+      YSTFqae5vpnsFAdJSck0NjWS6dChjXvwKlZiPi+SznDe62ZAAmi1WnQ6HUI5+ZxdZ0ur1aDV
+      fTEamk/qB0DRDM7RoyTRX+YXwbF11EdwpLiIiqMVZKenUXG0gozUdAwGLQajjtbWDjQ6LUaj
+      kczMdHqDkEQPnc4k5FjkvNfNF6fmVRcpibGTZzJ28kwA8vMLARg5ahRKLIgvoiUnJ6t/6eGF
+      YwHIzsm7INGpCaA6b2KVGxCBzlMuYwZO9+ygNnMy2rSxgxbXsdQEUJ03sX0vIzefeqrdM2Gc
+      9//OWwKo3aCqhKYmgCqhqQmgSmhqAqgSmpoAqoSmJoAqoakJoEpoagKoEpqaAKqEpiaAKqGp
+      CaBKaGoCqBLa/wcrFOy9enzD0wAAAABJRU5ErkJggg==
     </thumbnail>
   </thumbnails>
 </workbook>
