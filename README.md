@@ -84,9 +84,8 @@ The story -
 
 The riders use the bikes with varying ride time that ranges from under a month to over three months. 
 
-![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/7df506cd-b54c-4487-98eb-64614e1f92c4)
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/e908f5ec-a802-4e9f-91f1-09a158124ba3)
 
-![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/4ebd9d8f-cfec-4bbf-bf30-73367ebb68bf)
 
 Findings, story and audience, accessibility
 
