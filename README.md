@@ -134,10 +134,16 @@ The following image shows the density of rides ended by annual members in each s
 
 - On many levels annual users are bike usage is greater than that of casual users.
 - The number of rides started by casual users is increasing by the month.
+- The number of rides started by annual users is decreasing by the month.
 - The annual members are very spreadout in terms of the locations they start their rides.
-- While both annual users and casual users use this service majorly in Downtown Chicago and the tourist spots, annual users have a significant presence around the University of Chicago.  
+- The peak hours during a day (annual users) are between 7 AM to 9 AM and 3PM to 7PM.
+- While both annual users and casual users use this service majorly in Downtown Chicago and the tourist spots, annual users have a significant presence around the University of Chicago. The stations around the university also attract some casual users. 
+- There is one station that is very popular amongst casual users. This is on the West Hubbard street between North Leavitt street and North Hoyne Avenue. There are many reasons for this. The leading theory is that it a popular tourist attraction for food, further investigation is required.
+- Casual members are the most active around the beach areas. This is another reason to investigate the user background to attract casual customers.
+- Evidence also shows that a significant portion of the casual users are likely to use the services under a day or two.
+- Evidence also shows that casual customers are very likely to use this service for at least 30 minutes.    
 
-  
+**Next Steps**  
 A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
 
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members.
