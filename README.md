@@ -120,14 +120,13 @@ The following image shows the density of rides ended by casual members in each s
 
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/370db1b5-f5f3-4ef5-8583-48de944e4c78)
 
-The following image shows the density of rides ended by annual members in each station.
-
-![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/1d5db379-16c8-45d3-97b7-a15aee4e931c)
-
 The following image shows the density of rides started by annual members in each station. 
 
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/317e442e-fd40-4c21-bc78-738f96a912aa)
 
+The following image shows the density of rides ended by annual members in each station.
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/fef7db43-7fd4-47be-8292-ce0c107cdbb3)
 
 ##### Phase 6: Act
 
