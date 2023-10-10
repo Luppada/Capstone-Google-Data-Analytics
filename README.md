@@ -136,6 +136,7 @@ The following image shows the density of rides ended by annual members in each s
 - The number of rides started by casual users is increasing by the month.
 - The number of rides started by annual users is decreasing by the month.
 - The annual members are very spreadout in terms of the locations they start their rides.
+
 - While both annual users and casual users use this service majorly in Downtown Chicago and the tourist spots, annual users have a significant presence around the University of Chicago. Stations around the university also attract some casual users to use this service. This suggests that the students and/or staff are annual members.
 - The casual users have majorly started and ended their rides closer to the seashore. This points to a hypothesis that casual users could be tourists.
 - A station where the casual users have frequently started and ended their rides is the station on West Hubbard Street between North Hoyne Avenue and North Leavitt Street. This could be due to the restaurants or the Western avenue train station. The leading theory is that it a popular tourist attraction for food, further investigation is required.
@@ -147,6 +148,15 @@ The following image shows the density of rides ended by annual members in each s
 
 **Recommended Actions**
   
+- The peak hours during a day (annual users) are between 7 AM to 9 AM and 3PM to 7PM.
+- While both annual users and casual users use this service majorly in Downtown Chicago and the tourist spots, annual users have a significant presence around the University of Chicago. The stations around the university also attract some casual users. 
+- There is one station that is very popular amongst casual users. This is on the West Hubbard street between North Leavitt street and North Hoyne Avenue. There are many reasons for this. The leading theory is that it a popular tourist attraction for food, further investigation is required.
+- Casual members are the most active around the beach areas. This is another reason to investigate the user background to attract casual customers.
+- Evidence also shows that a significant portion of the casual users are likely to use the services under a day or two.
+- Evidence also shows that casual customers are very likely to use this service for at least 30 minutes.    
+
+**Next Steps**  
+
 A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
 
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members. One can use the member personal information of members, such as age groups, professions, to detect which groups are morelikely to use this service.  
