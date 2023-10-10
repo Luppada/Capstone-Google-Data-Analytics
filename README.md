@@ -112,18 +112,35 @@ Ride time in minutes:
 
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/e20dddf6-38ff-44ac-be97-3f1abbf02ea5)
 
+The following image shows the density of rides started by casual members in each station. 
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/7a5ce9ac-c1b5-4cef-8ec0-f12d4c6dcbb4)
+
+The following image shows the density of rides ended by casual members in each station. 
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/370db1b5-f5f3-4ef5-8583-48de944e4c78)
+
+The following image shows the density of rides ended by annual members in each station.
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/1d5db379-16c8-45d3-97b7-a15aee4e931c)
+
+The following image shows the density of rides started by annual members in each station. 
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/317e442e-fd40-4c21-bc78-738f96a912aa)
+
 
 ##### Phase 6: Act
 
 Insights:
 
 - On many levels annual users are bike usage is greater than that of casual users.
-- The number of rides started by casual users is increasing by the month. 
+- The number of rides started by casual users is increasing by the month.
+- THe 
 
 A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
 
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members.
 
-Then I can use the member personal info like age groups, professions etc to detect which popuation  
+One can use the member personal information of members, such as age groups, professions, to detect which groups are morelikely to use this service.  
  
-A few dates/weeks have particularly high numbers. An understanding of local events will help plan better to serve the customers. 
+Few dates/weeks have particularly high numbers. An understanding of local events will help plan better to serve the customers. 
