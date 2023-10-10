@@ -100,15 +100,30 @@ Below chart represents how many rides were initiated by the customers each hour 
 
 ![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/0aff7192-2a69-416f-9c20-f0e0e586a5c8)
 
-Findings, story and audience, accessibility
+Below charts represent the ride times and the number of people using the bikes for that amount time.
+
+Ride time in Days:
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/ef7724cf-f052-46d9-b7a7-b588c90de84f)
+
+Ride time in Hours:
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/83492ec9-3b8c-48d9-95b3-94e13058403f)
+
+Ride time in minutes:
+
+![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/e20dddf6-38ff-44ac-be97-3f1abbf02ea5)
+
 
 ##### Phase 6: Act
-What additional data?
+
+Insights:
+
+- On many levels annual users are bike usage is greater than that of casual users.
+- The number of rides started by casual users is increasing by the month. 
 
 A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
 
-![image](https://github.com/Luppada/Capstone-Google-Data-Analytics/assets/114107498/af127a28-0fdc-4683-beab-4f10a8f006bc)
-
 For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members.
+
 Then I can use the member personal info like age groups, professions etc to detect which popuation  
  
+A few dates/weeks have particularly high numbers. An understanding of local events will help plan better to serve the customers. 
