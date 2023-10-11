@@ -157,11 +157,21 @@ The following image shows the density of rides ended by annual members in each s
 - Evidence also shows that casual customers are very likely to use this service for at least 30 minutes.    
 
 **Next Steps**  
-A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well.
-  
+A critical part of data that is missing is the member ID. While we are able to identify the type of member, having a unique member ID, whether casual or annual member, will be helpful in understanding how often these members are returning to our services, predict churn and retaining them as well. I can use the member ID to detect usage patterns. This can be both casual members or annual members. One can use the member personal information of members, such as age groups, professions, to detect which groups are morelikely to use this service.  
  
-For e.g. I can use the member ID to detect usage patterns. This can be both casual members or annual members. One can use the member personal information of members, such as age groups, professions, to detect which groups are morelikely to use this service.  
- - Collecting user biodata for detailed behavior analysis - student plans and day passes.
- - Few dates/weeks have particularly high numbers. An understanding of local events will help plan better to serve the customers.
+**Action Items**
+ - Collect user biodata for detailed behavior analysis - student plans and day passes for tourists.
+ - Few dates/weeks have particularly high numbers. Collect data to understand of local events will help plan better to serve the customers.
  - Create day passes to attract the attention of casual users.
  - Understand local attractions to advertise to more casual and prospective users.
+ - Investigate reasons for the drop in rides started by the users.
+
+
+##### Next Steps and Closeout
+
+- I will be working on developing a pipeline to load any new data as input and automate the processing and merge this next data with the data at hand and create up-to date insights.
+- I will work towards creating a Machine Learning model to predict the end station and ride time.
+
+I have successfully created an analysis and provided four action items that will drive Cyclistic towards better user retention and membership sales. The analysis process is never complete, but I will be stopping this project here to work on other case studies. 
+
+ Feel free to provide any feedback
