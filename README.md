@@ -7,12 +7,12 @@ First Capstone Project for the Google Data Analytics Certification
 
 **Start Date**: October 5, 2023.
 
-**End Date**: Work in Progress
+**End Date**: October 10, 2023.
 
 
 #### Background
 
-A data analyst(me) is working in the marketing analyst team of a Chicago-based bike-share company called Cyclistic. This company provides both annual memberships and casual (single-ride or full-day) passes. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. The Data Analyst is tasked to create an analysis and report their insights. These insights will be used to support design a new marketing strategy to convert casua riders into annual members. Visuals will play a key role in having the new strategy approved by Cyclistic Executives.
+A data analyst is working in the marketing analyst team of a Chicago-based bike-share company called Cyclistic. This company provides both annual memberships and casual (single-ride or full-day) passes. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. The Data Analyst is tasked to create an analysis and report their insights. These insights will be used to support design a new marketing strategy to convert casual riders into annual members. Visuals will play a key role in having the new strategy approved by Cyclistic Executives.
 
 ##### Phase 1: Ask
 
@@ -30,8 +30,21 @@ Analyze the data collected by Cyclistic to differentiate the bike usage between 
 The dataset used is named as 'Divvy_Trips_2020_Q1.zip', downloaded from [this webpage](https://divvy-tripdata.s3.amazonaws.com/index.html). 
 
 Upon downloading the zip file it is extracted and renamed as 'Trips_2020_Q1'. This dataset consists of data collected in the first quarter of 2020 (January to March).  While there are many other sources, I wanted to use the latest data that is collected for longer period of time as it can provide more insights that will allow a better understanding of how the riders are using Cyclistic bikes. 
+
 Dataset features:
-Types of errors:
+'ride_id': A unique 16-character ID used to identify each individual ride.
+'rideable_type': The type of bike used, and in this column, all values are 'docked_bike.'
+'started_at': The timestamp for when the ride started.  An example of the timestamps (2020-01-21 20:06:59)
+'ended_at': The timestamp for when the ride ended.
+'start_station_name': The name of the ride starting station for the ride.
+'start_station_id': A unique identifier for the ride starting station.
+'end_station_name': The name of the ride ending station for the ride.
+'end_station_id': A unique identifier for the ride ending station.
+'start_lat': The latitude coordinate of the ride starting location.
+'start_lng': The longitude coordinate of the ride starting location.
+'end_lat': The latitude coordinate of the ride ending location.
+'end_lng': The longitude coordinate of the ride ending location.
+'member_casual': Indicates whether the rider is an annual member or a casual user.
 
 
 ##### Phase 3: Process
