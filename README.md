@@ -170,7 +170,6 @@ A critical part of data that is missing is the member ID. While we are able to i
 ##### Next Steps and Closeout
 
 - I will be working on developing a pipeline to load any new data as input and automate the processing and merge this next data with the data at hand and create up-to date insights.
-- I will work towards creating a Machine Learning model to predict the end station and ride time.
 
 I have successfully created an analysis and provided four action items that will drive Cyclistic towards better user retention and membership sales. The analysis process is never complete, but I will be stopping this project here to work on other case studies. 
 
