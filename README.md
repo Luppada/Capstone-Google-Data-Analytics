@@ -1,5 +1,5 @@
-# Capstone-Google-Data-Analytics
-First Capstone Project for the Google Data Analytics Certification 
+# Cyclistic Bike Usage Analysis
+Capstone Project for the Google Data Analytics Certification 
 
 #### **Author**: Likhith Sri Vatsa Uppada  
 
@@ -51,7 +51,7 @@ Dataset features:
 
 Data Integrity and Cleaning
 
-After extracting the file, I have tried to open it using excel. FYI, the size of this file is 69 MB and it has over 40,000 rows. This caused a heavy load on the excel software. Therefore, I have decided to use the Pandas package in the Python to check the data integrity and for any additional processing required. Jupyter Notebook is the platform I have used to look for data integrity.
+After extracting the file, I have tried to open it using excel. The data collected has over 40,000 rows each representing a unique bike ride. This caused a heavy load on the excel software. Therefore, I have decided to use the Pandas package in the Python to check the data integrity and for any additional processing required. Jupyter Notebook is the platform I have used to look for data integrity.
 
 I will add the ipynb file to my for reference. 
 
