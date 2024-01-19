@@ -1,0 +1,16 @@
+
+
+Data is available and is constntly being updated in the link below:
+https://divvy-tripdata.s3.amazonaws.com/index.html 
+
+Observations:
+
+* The nulls in the Station ID have been consistently increasing, poitning to the fact that the users can pick up a bike at any location and drop them off at any location.
+* With many stations being so close to one another it will not be a good idea to connect them to the closest station.
+
+
+Conclusions:
+* This project has the potential to be a data engineering project.
+* I will create two notebooks. One of them will be EDA and the other will be a Data Engineering pipeline that will be triggered asynchronously. 
+* The DE notebook will read the 'new' data and already prepared data (once functional the code will create a cleaned/prepared file) so that the new data can be added to this prepared data and act as a prepared data while maintaining data consistency and integrity preventing any duplicates.
+* As I have already worked on this dataset, I will be using the Nager API to pull holiday data to see how the trends are impacted by holidays. This work will be performed in another notebook to understand how connections can be drawn to the frequency of rides and holidays.   
