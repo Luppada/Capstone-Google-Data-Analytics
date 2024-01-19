@@ -1,4 +1,5 @@
-# Cyclistic Bike Usage Analysis (Now (1/18/2024) being revised for working with Duck DB dasboarding with Power BI)
+# Cyclistic Bike Usage Analysis 
+#### (Now (1/18/2024) being revised for working with Duck DB dasboarding with Power BI)
 Capstone Project for the Google Data Analytics Certification 
 
 #### **Author**: Likhith Sri Vatsa Uppada  
